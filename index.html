@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Jin | Mechatronics Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="timeline-nav">
+        <a href="#year-2026" class="timeline-nav-item">2026</a>
+        <a href="#year-2025" class="timeline-nav-item">2025</a>
+        <a href="#year-2024" class="timeline-nav-item">2024</a>
+        <a href="#year-2023" class="timeline-nav-item">2023</a>
+    </div>
+
+    <header>
+        <nav>
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#links" class="nav-link">Links</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <div class="container home-grid reveal">
+                <div class="profile-side">
+                    <div class="profile-img-container">
+                        <img src="images/picture.jpg" alt="Martin Jin" class="profile-photo">
+                    </div>
+                </div>
+                <div class="intro-text">
+                    <h1 class="greeting">Hi, I'm <span class="accent-text">Qicong (Martin) Jin</span>.</h1>
+                    <h2 class="subtitle">Mechatronics Engineering Student @ UoA</h2>
+                    <p class="bio">
+                        I have always found it difficult to separate my interests into just one bucket. Whether it was
+                        building physical mechanisms, designing circuits, or writing logic to control them, I realized
+                        that my best work happened when all three disciplines overlapped. I chose Mechatronics because
+                        it combines mechanical, electrical, and computer systems into a single cohesive field, allowing
+                        me to
+                        be exposed to the full range of engineering challenges.
+
+                        In my experience, the most complex engineering challenges are rarely solved within a single
+                        domain. I enjoy multidisciplinary problem-solving because it allows me to maintain a
+                        "big-picture" view of a project—ensuring that the hardware is optimized for the electronics, and
+                        the software is tuned perfectly to the physical constraints of the system.
+                    </p>
+                    <strong>About this site:</strong> This website is a gallery of my engineering journey. It serves to
+                    document my technical growth and showcase how I bridge the gap between theoretical analysis and
+                    physical implementation. Note it is still a work in progress, and texts may not be updated for all projects.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section bg-light">
+            <div class="container project-layout">
+
+                <div class="main-timeline">
+                    <h2 class="section-title reveal">Technical Timeline</h2>
+
+                    <div class="year-group reveal" id="year-2026">
+                        <div class="year-header" onclick="toggleYear('year-2026')">
+                            <span>2026</span>
+                            <span class="toggle-icon">−</span>
+                        </div>
+                        <div class="year-content">
+                            <div class="project-card" data-title="F:SAE Autonomous Research"
+                                data-image="project_resources/autonomousResearch.jpg"
+                                data-hours="20"
+                                data-what="Investigating lateral steering control using the Stanley Controller model.|Researching sensor fusion strategies to merge LiDAR and Camera data.|Optimizing path-planning algorithms for real-time track navigation."
+                                data-how="Deep diving into control theory to minimize cross-track error at high speeds.|Investigating Kalman Filters for reliable perception in dynamic environments.|Collaborating with the wider F:SAE team to ensure software-hardware integration."
+                                data-why="To develop a robust 'perception-to-action' pipeline for the vehicle.|To achieve high-speed stability while maintaining precise course tracking."
+                                data-skills="Control Theory, Research, Python, SLAM">
+                                <div class="card-header">
+                                    <h3>F:SAE Autonomous Research</h3>
+                                    <span class="timeline-date">Current</span>
+                                </div>
+                                <p>Deep dive into Stanley controllers and sensor fusion strategies for autonomous
+                                    perception.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Control Theory</span>
+                                    <span class="pill">Research</span>
+                                    <span class="pill">Python</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="year-group reveal" id="year-2025">
+                        <div class="year-header" onclick="toggleYear('year-2025')">
+                            <span>2025</span>
+                            <span class="toggle-icon">−</span>
+                        </div>
+                        <div class="year-content">
+                            <div class="project-card" data-title="Mini Warman: Physical Robot"
+                                data-image="project_resources/warmanBuild.jpg"
+                                data-hours="20"
+                                data-what="Designing and building a physical robot to transport tennis balls across a designated course.|Prototyping circuit boards for motor control and sensor feedback.|Programming the robot's logic using Embedded C."
+                                data-how="Utilizing breadboards for rapid electronics testing before final assembly.|Implementing precise motor synchronization to navigate complex terrain.|Iteratively testing mechanical intake designs to ensure reliable ball pickup."
+                                data-why="To bridge the gap between a CAD concept and a functioning physical machine.|To apply embedded programming principles in a high-pressure competition setting."
+                                data-skills="Embedded C, Electronics, Prototyping, Mechatronics">
+                                <div class="card-header">
+                                    <h3>Mini Warman: Robot Build</h3>
+                                    <span class="timeline-date">In Progress</span>
+                                </div>
+                                <p>Hardware development focusing on breadboard prototyping and embedded programming.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Embedded C</span>
+                                    <span class="pill">Electronics</span>
+                                    <span class="pill">Prototyping</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+
+                            <div class="project-card" data-title="Vex Autonomous Robot"
+                                data-image="project_resources/vexRobot.jpg"
+                                data-hours="20"
+                                data-what="Developing navigation logic for a simulated Vex robot to complete payload delivery.|Implementing sensor-based feedback loops for autonomous movement.|Coding precise sequences for payload pickup and drop-off."
+                                data-how="Using C++ to define robot behavior and sensor interaction.|Testing logic in a simulation environment to refine obstacle avoidance.|Analyzing control system responses to environmental variables."
+                                data-why="To master the fundamentals of autonomous navigation and logic sequencing.|To understand how control systems translate sensor data into physical action."
+                                data-skills="Logic, Control Systems, C++, Simulation">
+                                <div class="card-header">
+                                    <h3>Vex Autonomous Robot</h3>
+                                    <span class="timeline-date">Feb - May</span>
+                                </div>
+                                <p>Simulation-based navigation and payload delivery logic for the Vex platform.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Logic</span>
+                                    <span class="pill">Control Systems</span>
+                                    <span class="pill">C++</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+
+                            <div class="project-card" data-title="Grocery Tracker App"
+                                data-image="project_resources/grocery.jpg"
+                                data-hours="20"
+                                data-resource="https://github.com/Martin-Jin/StorageTrackerApp"
+                                data-what="Building a native Android application to manage household inventory.|Developing a user-friendly interface for adding and tracking items.|Implementing data persistence to save user input locally."
+                                data-how="Using Java and Android Studio for application development.|Designing a clean UI/UX to ensure ease of use for everyday tracking.|Applying software engineering principles to manage app state and data flow."
+                                data-why="To explore mobile development and broaden software engineering skills.|To create a practical tool for personal organization and inventory management."
+                                data-skills="Android, Java, UI/UX, Software Dev">
+                                <div class="card-header">
+                                    <h3>Grocery Tracker App</h3>
+                                    <span class="timeline-date">Jan - Mar</span>
+                                </div>
+                                <p>Native Android app for inventory management and amount tracking.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Android</span>
+                                    <span class="pill">Java</span>
+                                    <span class="pill">UI/UX</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="year-group reveal" id="year-2024">
+                        <div class="year-header" onclick="toggleYear('year-2024')">
+                            <span>2024</span>
+                            <span class="toggle-icon">−</span>
+                        </div>
+                        <div class="year-content">
+                            <div class="project-card" data-title="Mini Warman CAD Design"
+                                data-image="project_resources/miniWarmanCAD.png" data-resource="files/miniWarmanCAD.pdf"
+                                data-hours="20"
+                                data-what="Creating a full 3D assembly of the competition robot.|Generating detailed technical drawings for manufacturing components.|Performing clearance checks and weight distribution analysis."
+                                data-how="Using professional CAD software to design intricate mechanical linkages.|Simulating movement to ensure no mechanical interference during operation.|Iterating on the chassis design to optimize for strength and weight."
+                                data-why="To ensure mechanical components fit perfectly before physical production.|To document the design process for competition review and manufacturing."
+                                data-skills="CAD, Engineering Design, SolidWorks, Technical Drawing">
+                                <div class="card-header">
+                                    <h3>Mini Warman CAD Design</h3>
+                                    <span class="timeline-date">Aug - Oct</span>
+                                </div>
+                                <p>Mechanical design and 3D modeling of a ball-transportation robot.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">CAD</span>
+                                    <span class="pill">Engineering Design</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+
+                            <div class="project-card" data-title="Functional Lamp CAD"
+                                data-image="project_resources/balanceLamp.jpg" data-resource="files/balanceLamp.pdf"
+                                data-hours="20"
+                                data-what="Designing a custom desk lamp with integrated mechanical joints.|Modeling complex aesthetic surfaces while maintaining functionality.|Creating assembly instructions and BOM for the design."
+                                data-how="Focusing on joint tolerances to allow for smooth lamp adjustment.|Utilizing 3D modeling tools to balance form and engineering requirements.|Designing for assembly by minimizing part counts and complex fasteners."
+                                data-why="To practice consumer product design and assembly-driven modeling.|To explore the intersection of aesthetic design and mechanical engineering."
+                                data-skills="CAD, 3D Modeling, Product Design">
+                                <div class="card-header">
+                                    <h3>Functional Lamp CAD</h3>
+                                    <span class="timeline-date">Mar - May</span>
+                                </div>
+                                <p>Design of a custom desk lamp focusing on assembly constraints and aesthetic form.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">CAD</span>
+                                    <span class="pill">3D Modeling</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="year-group reveal" id="year-2023">
+                        <div class="year-header" onclick="toggleYear('year-2023')">
+                            <span>2023</span>
+                            <span class="toggle-icon">−</span>
+                        </div>
+                        <div class="year-content">
+                            <div class="project-card" data-title="Brew & Bean: Full-Stack Coffee Hub"
+                                data-image="project_resources/coffee.jpg"
+                                data-resource="https://github.com/Martin-Jin/AS3.4-AS3.8-DTECH"
+                                data-what="Developing a responsive web application for a boutique coffee roastery.|Integrating Firebase for real-time inventory management.|Building a secure user authentication system for customer orders."
+                                data-how="Using HTML5, CSS3, and JavaScript for a modern, mobile-first frontend.|Leveraging Firebase Firestore to handle database queries and persistent storage.|Implementing secure API calls to manage dynamic menu updates."
+                                data-why="To master the integration of NoSQL databases within web environments.|To create a functional commercial tool that bridges digital ordering with physical inventory."
+                                data-skills="Web Dev, Firebase, NoSQL, JavaScript"
+                                data-hours="20">
+                                <div class="card-header">
+                                    <h3>Brew & Bean: Coffee Hub</h3>
+                                    <span class="timeline-date">Sept - Dec</span>
+                                </div>
+                                <p>Full-stack web application featuring real-time database integration and user
+                                    authentication via Firebase.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Web Dev</span>
+                                    <span class="pill">Firebase</span>
+                                    <span class="pill">NoSQL</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="project-sidebar reveal">
+                    <div class="sidebar-block">
+                        <h4>Search</h4>
+                        <input type="text" id="projectSearch" placeholder="Search projects or skills...">
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h4>Filter by Type</h4>
+                        <div class="filter-pills" id="skillFilter">
+                            <button class="filter-pill active" data-filter="all">All</button>
+                            <button class="filter-pill" data-filter="CAD">CAD</button>
+                            <button class="filter-pill" data-filter="Control">Controls</button>
+                            <button class="filter-pill" data-filter="Embedded">Embedded</button>
+                            <button class="filter-pill" data-filter="Android">Mobile</button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-block highlights-block">
+                        <h4>Project Highlights</h4>
+                        <ul class="highlight-list">
+                            <li><a href="#year-2025" class="highlight-link">Mini Warman Build</a></li>
+                            <li><a href="#year-2026" class="highlight-link">F:SAE Research</a></li>
+                            <li><a href="#year-2025" class="highlight-link">Vex Autonomous Robot</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section id="links" class="section">
+            <div class="container reveal">
+                <h2 class="section-title">Links & Connect</h2>
+                <div class="links-grid">
+                    <a href="mailto:martinjin2016@gmail.com" class="link-btn">Email</a>
+                    <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/martinjin2016" class="link-btn" target="_blank">GitHub</a>
+                    <a href="files/cv.pdf" download="Martin_Jin_CV_2026" class="link-btn accent-btn">Download CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-window">
+            <button class="close-btn">&times;</button>
+            <h2 id="modal-title"></h2>
+            <div class="modal-stats-bar">
+                <div class="stat-item">
+                    <span class="stat-icon">⏱</span>
+                    <span id="modal-hours"></span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">📅</span>
+                    <span id="modal-date-display"></span>
+                </div>
+            </div>
+            <div class="image-placeholder">Project Visual</div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>What I Did</h3>
+                    <ul id="modal-what" class="modal-list"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3>How</h3>
+                    <ul id="modal-how" class="modal-list"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Why</h3>
+                    <ul id="modal-why" class="modal-list"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Skills Developed</h3>
+                    <div id="modal-skills" class="skill-pills"></div>
+                </div>
+                <div id="modal-resource-action"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
