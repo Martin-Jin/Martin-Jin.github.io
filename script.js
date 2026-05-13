@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById(id);
         if (!container) return;
         container.innerHTML = "";
-        
+
         if (data && data.trim() !== "") {
             const items = data.split('|');
             items.forEach(item => {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update Title
             const modalTitle = document.getElementById('modal-title');
             if (modalTitle) modalTitle.innerText = card.dataset.title;
-            
+
             // Update Image
             const projectImg = card.dataset.image || 'images/default-project.jpg';
             const imgPlaceholder = document.querySelector('.image-placeholder');
@@ -153,22 +153,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 5. SEARCH & FILTERING ---
+// --- 5. SEARCH & FILTERING ---
     const searchInput = document.getElementById('projectSearch');
     const filterBtns = document.querySelectorAll('.filter-pill');
     const projectCards = document.querySelectorAll('.project-card');
+
+    // Automatically sync data-skills from the visible UI pills
+    projectCards.forEach(card => {
+        const pills = card.querySelectorAll('.skill-pills .pill');
+        const skillList = Array.from(pills).map(pill => pill.innerText.trim());
+        card.dataset.skills = skillList.join(', ');
+    });
 
     const filterProjects = () => {
         const term = (searchInput?.value || "").toLowerCase();
         const activeBtn = document.querySelector('.filter-pill.active');
         const activeFilter = activeBtn ? activeBtn.dataset.filter.toLowerCase() : 'all';
-        
+
         projectCards.forEach(card => {
             const title = (card.dataset.title || "").toLowerCase();
+            // Now using the dynamically generated dataset
             const skills = (card.dataset.skills || "").toLowerCase();
+
             const matchesSearch = title.includes(term) || skills.includes(term);
             const matchesFilter = activeFilter === 'all' || skills.includes(activeFilter);
-            card.style.display = matchesSearch && matchesFilter ? 'block' : 'none';
+
+            card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+        });
+
+        // Hide empty year groups
+        document.querySelectorAll('.year-group').forEach(yearGroup => {
+            const visibleCards = yearGroup.querySelectorAll('.project-card[style="display: block;"]');
+            yearGroup.style.display = (visibleCards.length === 0) ? 'none' : 'block';
         });
     };
 
@@ -180,9 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     // --- 6. MODAL CLOSING ---
-    const closeModal = () => { 
-        if (modal) modal.classList.remove('show'); 
-        document.body.style.overflow = 'auto'; 
+    const closeModal = () => {
+        if (modal) modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
     };
 
     document.querySelectorAll('.close-btn').forEach(btn => btn.onclick = closeModal);

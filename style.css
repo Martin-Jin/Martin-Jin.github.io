@@ -77,6 +77,12 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
     background: white; border: 1px solid var(--border); padding: 35px; border-radius: 16px;
     margin-bottom: 25px; transition: transform 0.3s, box-shadow 0.3s;
 }
+
+/* Ensure hidden cards definitely take up no space */
+.project-card[style*="display: none"] {
+    margin-bottom: 0 !important;
+}
+
 .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
 .card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
 .timeline-date { font-size: 0.9rem; color: var(--accent); font-weight: 600; }
