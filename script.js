@@ -153,12 +153,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-// --- 5. SEARCH & FILTERING ---
+// --- 5. SEARCH & FILTERING & SORTING ---
     const searchInput = document.getElementById('projectSearch');
     const filterBtns = document.querySelectorAll('.filter-pill');
     const projectCards = document.querySelectorAll('.project-card');
 
-    // Automatically sync data-skills from the visible UI pills
+    // 1. Map months to numerical values for sorting (May = 5, Jan = 1)
+    const monthMap = { 
+        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6, 
+        "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12 
+    };
+
+    const getMonthValue = (dateText) => {
+        const text = dateText.toLowerCase();
+        if (text.includes('current')) return 99; // Keep current at top
+
+        // If range (e.g., "Mar - May"), split and take the last part
+        const parts = text.split(/[-–—]/);
+        const latestPart = parts[parts.length - 1].trim();
+
+        // Find the month name in the string
+        for (const [name, value] of Object.entries(monthMap)) {
+            if (latestPart.includes(name)) return value;
+        }
+        return 0;
+    };
+
+    // 2. Automatically sort projects within each year group on load
+    document.querySelectorAll('.year-group').forEach(yearGroup => {
+        const container = yearGroup.querySelector('.year-content');
+        if (!container) return;
+
+        const cards = Array.from(container.querySelectorAll('.project-card'));
+
+        cards.sort((a, b) => {
+            const dateA = a.querySelector('.timeline-date').innerText;
+            const dateB = b.querySelector('.timeline-date').innerText;
+            return getMonthValue(dateB) - getMonthValue(dateA); // Descending order
+        });
+
+        // Re-append sorted cards to the container
+        cards.forEach(card => container.appendChild(card));
+    });
+
+    // 3. Automatically sync data-skills from the visible UI pills for filtering
     projectCards.forEach(card => {
         const pills = card.querySelectorAll('.skill-pills .pill');
         const skillList = Array.from(pills).map(pill => pill.innerText.trim());
@@ -172,16 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         projectCards.forEach(card => {
             const title = (card.dataset.title || "").toLowerCase();
-            // Now using the dynamically generated dataset
             const skills = (card.dataset.skills || "").toLowerCase();
-
             const matchesSearch = title.includes(term) || skills.includes(term);
             const matchesFilter = activeFilter === 'all' || skills.includes(activeFilter);
-
             card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
         });
 
-        // Hide empty year groups
         document.querySelectorAll('.year-group').forEach(yearGroup => {
             const visibleCards = yearGroup.querySelectorAll('.project-card[style="display: block;"]');
             yearGroup.style.display = (visibleCards.length === 0) ? 'none' : 'block';
