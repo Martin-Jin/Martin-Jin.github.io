@@ -69,6 +69,25 @@
                         </div>
 
                         <div class="year-content">
+                            <div class="project-card" data-title="FSAE MPC Path Tracking Simulator"
+                                data-resource="https://github.com/Martin-Jin/fsae_MPCTest"
+                                data-image="project_resources/mpcSimulator.jpg" data-hours="40 hours"
+                                data-what="Building a high-fidelity 2D closed-loop simulator pairing a 24-state nonlinear vehicle plant (Pacejka tyre model, suspension, aero) with a linear time-varying MPC controller.|Implementing an 8-state bicycle model MPC solved via CVXPY/OSQP, with cone-based boundary detection and centreline planning shared with the ROS2 stack.|Developing a CMA-ES based offline weight tuner to automatically optimise MPC cost matrices across synthetic FS-spec corner geometries.|Integrating the controller into the FSDS (Formula Student Driverless Simulator) via ROS2 nodes for closed-loop testing in Unreal Engine."
+                                data-how="Using scipy matrix exponentials for exact Zero-Order-Hold discretisation of the linearised bicycle model.|Applying adaptive gain scheduling to scale MPC cost weights by speed and estimated path curvature.|Structuring a shared rollout core so the offline tuner and live simulator produce identical scores.|Deploying ROS2 nodes with rclpy to bridge perception, planning, and control topics in the FSDS simulator."
+                                data-why="To gain hands-on experience with optimal control theory and convex optimisation for autonomous vehicle path tracking.|To support the F:SAE autonomous team's controls pipeline with a tuned, tested MPC controller.|To deepen my understanding of the gap between simplified control models and high-fidelity vehicle dynamics.">
+                                <div class="card-header">
+                                    <h3>FSAE MPC Path Tracking Simulator</h3>
+                                    <span class="timeline-date">June - July</span>
+                                </div>
+                                <p>Closed-loop MPC simulator and CMA-ES weight tuner for F:SAE autonomous path tracking.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Autonomous vehicles</span>
+                                    <span class="pill">Control Theory</span>
+                                    <span class="pill">Python</span>
+                                    <span class="pill">ROS2</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
                             <div class="project-card" data-title="F:SAE Autonomous Research"
                                 data-image="project_resources/autonomousResearch.jpg" data-hours="20 hours"
                                 data-what="Investigating the technical specifications and functions of various autonomous sensors.|Researching sensor fusion strategies to effectively merge LiDAR and camera data.|Analysing different fusion architectures to determine their impact on perception accuracy."
