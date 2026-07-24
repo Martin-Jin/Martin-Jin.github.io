@@ -98,13 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modalTitle) modalTitle.innerText = card.dataset.title;
 
             // Update Image
-            const projectImg = card.dataset.image || 'images/default-project.jpg';
             const imgPlaceholder = document.querySelector('.image-placeholder');
             if (imgPlaceholder) {
-                imgPlaceholder.innerHTML = `<img src="${projectImg}" alt="${card.dataset.title}" 
-                    style="width:100%; height:100%; object-fit:cover; border-radius:12px; display:block;">`;
+                if (card.dataset.image) {
+                    imgPlaceholder.innerHTML = `<img src="${card.dataset.image}" alt="${card.dataset.title}">`;
+                } else {
+                    imgPlaceholder.innerHTML = 'Project Visual';
+                }
             }
-            // Inside the btn.addEventListener('click', (e) => { ... }) block:
 
             // Update Stats Bar
             const modalHours = document.getElementById('modal-hours');
@@ -136,14 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Resource Link
             const resourceAction = document.getElementById('modal-resource-action');
             if (resourceAction) {
-                if (card.dataset.resource) {
-                    resourceAction.innerHTML = `
-                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
-                            <a href="${card.dataset.resource}" target="_blank" class="link-btn accent-btn" style="text-decoration:none; display:inline-block;">Project files</a>
-                        </div>`;
-                } else {
-                    resourceAction.innerHTML = "";
-                }
+                resourceAction.innerHTML = card.dataset.resource
+                    ? `<a href="${card.dataset.resource}" target="_blank" rel="noopener" class="link-btn accent-btn">Project files</a>`
+                    : "";
             }
 
             if (modal) {
@@ -213,12 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const skills = (card.dataset.skills || "").toLowerCase();
             const matchesSearch = title.includes(term) || skills.includes(term);
             const matchesFilter = activeFilter === 'all' || skills.includes(activeFilter);
-            card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+            card.classList.toggle('hidden', !(matchesSearch && matchesFilter));
         });
 
         document.querySelectorAll('.year-group').forEach(yearGroup => {
-            const visibleCards = yearGroup.querySelectorAll('.project-card[style="display: block;"]');
-            yearGroup.style.display = (visibleCards.length === 0) ? 'none' : 'block';
+            const hasVisibleCard = yearGroup.querySelector('.project-card:not(.hidden)');
+            yearGroup.classList.toggle('hidden', !hasVisibleCard);
         });
     };
 

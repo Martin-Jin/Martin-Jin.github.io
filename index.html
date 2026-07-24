@@ -35,22 +35,26 @@
                     <h1 class="greeting">Hi, I'm <span class="accent-text">Qicong (Martin) Jin</span>.</h1>
                     <h2 class="subtitle">Mechatronics Engineering Student @ UoA</h2>
                     <p class="bio">
-                        I have always found it difficult to separate my interests into just one bucket. Whether it was
-                        building physical mechanisms, designing circuits, or writing logic to control them, I realized
-                        that my best work happened when all three disciplines overlapped. I chose Mechatronics because
-                        it combines mechanical, electrical, and computer systems into a single cohesive field, allowing
-                        me to
-                        be exposed to the full range of engineering challenges.
-
-                        In my experience, the most complex engineering challenges are rarely solved within a single
-                        domain. I enjoy multidisciplinary problem-solving because it allows me to maintain a
-                        "big-picture" view of a project—ensuring that the hardware is optimized for the electronics, and
-                        the software is tuned perfectly to the physical constraints of the system.
+                        I've never been able to separate my interests into just one bucket — building physical
+                        mechanisms, designing circuits, and writing the logic that controls them all felt like part of
+                        the same problem. Mechatronics let me stop choosing: it combines mechanical, electrical, and
+                        computer systems into one field, so I get to work across the full stack of an engineering
+                        challenge.
                     </p>
-                    <strong>About this site:</strong> This website is a gallery of my engineering journey. It serves to
-                    document my technical growth and showcase how I bridge the gap between theoretical analysis and
-                    physical implementation. Note it is still a work in progress, and texts may not be updated for all
-                    projects.
+                    <p class="bio">
+                        Most interesting problems don't respect discipline boundaries. I enjoy keeping a "big-picture"
+                        view of a project — making sure the hardware is designed for the electronics, and the software
+                        is tuned to the physical constraints of the system it's actually running on.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="mailto:martinjin2016@gmail.com" class="link-btn accent-btn">Email me</a>
+                        <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/martinjin2016" class="link-btn" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                    <p class="about-note">
+                        <strong>About this site:</strong> a running log of my engineering projects — robots, CAD,
+                        control systems, and software — documenting how each one bridges design and implementation.
+                        Still a work in progress, so a few older write-ups are lighter on detail than the rest.
                     </p>
                 </div>
             </div>
@@ -69,6 +73,24 @@
                         </div>
 
                         <div class="year-content">
+                            <div class="project-card" data-title="CV Editor: Resume Builder"
+                                data-resource="https://github.com/Martin-Jin/CVEditor"
+                                data-image="project_resources/cvEditor.svg" data-hours="35 hours"
+                                data-what="Building a structured, click-to-edit CV/resume builder that runs entirely in the browser, with no backend or accounts.|Designing a section-based document model (text blocks, entry lists, skill lists, label lists) that renders consistently wherever a section type is used.|Implementing a single style panel that drives font, spacing, margins, column widths, rules, bullets, and colour for the whole document.|Adding drag-and-drop reordering, full undo/redo, autosave, and JSON/PDF export."
+                                data-how="Using React 19 and Vite for the UI, with Zustand managing document and theme state plus undo/redo history.|Implementing drag-and-drop section reordering with @dnd-kit.|Generating PDFs client-side with html2canvas and jsPDF, keeping the whole build static and deployable to GitHub Pages.|Structuring section types through a shared schema so new section types and style controls can be added without touching existing renderers."
+                                data-why="To have a CV tool I fully control, where layout stays consistent while content stays freely editable.|To practice building a maintainable component and state architecture for a non-trivial client-side React app.|To ship something genuinely useful for myself and reusable by others, rather than another to-do list app.">
+                                <div class="card-header">
+                                    <h3>CV Editor: Resume Builder</h3>
+                                    <span class="timeline-date">July</span>
+                                </div>
+                                <p>A structured, browser-only CV/resume builder and PDF exporter built with React.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">Web Dev</span>
+                                    <span class="pill">React</span>
+                                    <span class="pill">UI/UX</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
                             <div class="project-card" data-title="FSAE MPC Path Tracking Simulator"
                                 data-resource="https://github.com/Martin-Jin/fsae_MPCTest"
                                 data-image="project_resources/mpcSimulator.jpg" data-hours="40 hours"
@@ -189,7 +211,6 @@
                         <div class="year-content">
                             <div class="project-card" data-title="Functional Lamp CAD"
                                 data-image="project_resources/balanceLamp.jpg" data-resource="files/balanceLamp.pdf"
-                                data-resource="https://github.com/Martin-Jin/AS3.4-AS3.8-DTECH"
                                 data-hours="10 hours"
                                 data-what="Designing a custom desk lamp featuring integrated mechanical joints.|Balancing aesthetic form with practical mechanical functionality.|Generating technical drawings to document the design for manufacturing."
                                 data-how="Utilising Fusion 360 to model the lamp and its moving components.|Taking design inspiration from balancing weights and minimalist forms.|Designing for assembly by minimising part counts and simplifying fasteners."
@@ -251,6 +272,7 @@
                             <button class="filter-pill" data-filter="Control">Control systems</button>
                             <button class="filter-pill" data-filter="Programming">Programming</button>
                             <button class="filter-pill" data-filter="Design">Design</button>
+                            <button class="filter-pill" data-filter="Web Dev">Web Dev</button>
                             <button class="filter-pill" data-filter="Autonomous">Autonomous vehicles</button>
                         </div>
                     </div>
@@ -258,9 +280,9 @@
                     <div class="sidebar-block highlights-block">
                         <h4>Project Highlights</h4>
                         <ul class="highlight-list">
+                            <li><a href="#year-2026" class="highlight-link">CV Editor: Resume Builder</a></li>
+                            <li><a href="#year-2026" class="highlight-link">FSAE MPC Path Tracking Simulator</a></li>
                             <li><a href="#year-2026" class="highlight-link">Mini Warman Build</a></li>
-                            <li><a href="#year-2026" class="highlight-link">F:SAE Research</a></li>
-                            <li><a href="#year-2026" class="highlight-link">VEX Autonomous Robot</a></li>
                         </ul>
                     </div>
                 </aside>
@@ -311,7 +333,7 @@
                     <h3>Skills Developed</h3>
                     <div id="modal-skills" class="skill-pills"></div>
                 </div>
-                <div id="modal-resource-action"></div>
+                <div id="modal-resource-action" class="modal-resource-action"></div>
             </div>
         </div>
     </div>
