@@ -7,13 +7,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.querySelector('.modal-overlay');
 
     // --- 1. COLLAPSIBLE YEAR LOGIC ---
-    window.toggleYear = (yearId) => {
+    // Delegated (not a global window function) so it also handles keyboard activation below.
+    const toggleYear = (header) => {
+        const yearId = header.dataset.year;
         const container = document.getElementById(yearId);
         if (!container) return;
-        const icon = container.querySelector('.toggle-icon');
+        const icon = header.querySelector('.toggle-icon');
         const isCollapsed = container.classList.toggle('collapsed');
+        header.setAttribute('aria-expanded', String(!isCollapsed));
         if (icon) icon.innerText = isCollapsed ? "+" : "−";
     };
+
+    document.querySelectorAll('.year-header').forEach(header => {
+        header.addEventListener('click', () => toggleYear(header));
+        // Div-based toggles aren't natively keyboard-operable, so Enter/Space need to trigger them manually.
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleYear(header);
+            }
+        });
+    });
 
     // --- 2. NAVIGATION & SMOOTH SCROLL ---
     document.addEventListener('click', (e) => {
@@ -70,6 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     handleScroll();
 
     // --- 4. MODAL LOGIC & BULLET POINTS ---
+    // These are all static, single-instance elements, so look them up once rather than on every open.
+    const modalTitle = document.getElementById('modal-title');
+    const imgPlaceholder = document.querySelector('.image-placeholder');
+    const modalHours = document.getElementById('modal-hours');
+    const modalDate = document.getElementById('modal-date-display');
+    const skillsContainer = document.getElementById('modal-skills');
+    const resourceAction = document.getElementById('modal-resource-action');
+
     const createList = (id, data) => {
         // Search globally for the ID to ensure we find the correct list
         const container = document.getElementById(id);
@@ -94,11 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!card) return;
 
             // Update Title
-            const modalTitle = document.getElementById('modal-title');
             if (modalTitle) modalTitle.innerText = card.dataset.title;
 
             // Update Image
-            const imgPlaceholder = document.querySelector('.image-placeholder');
             if (imgPlaceholder) {
                 if (card.dataset.image) {
                     imgPlaceholder.innerHTML = `<img src="${card.dataset.image}" alt="${card.dataset.title}">`;
@@ -108,8 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Update Stats Bar
-            const modalHours = document.getElementById('modal-hours');
-            const modalDate = document.getElementById('modal-date-display');
             const dateText = card.querySelector('.timeline-date').innerText;
 
             if (modalHours) modalHours.innerText = card.dataset.hours || "TBD";
@@ -121,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
             createList('modal-why', card.dataset.why);
 
             // Skills Pills
-            const skillsContainer = document.getElementById('modal-skills');
             if (skillsContainer) {
                 skillsContainer.innerHTML = "";
                 if (card.dataset.skills) {
@@ -135,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Resource Link
-            const resourceAction = document.getElementById('modal-resource-action');
             if (resourceAction) {
                 resourceAction.innerHTML = card.dataset.resource
                     ? `<a href="${card.dataset.resource}" target="_blank" rel="noopener" class="link-btn accent-btn">Project files</a>`
@@ -231,6 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'auto';
     };
 
-    document.querySelectorAll('.close-btn').forEach(btn => btn.onclick = closeModal);
-    window.onclick = (e) => { if (e.target === modal) closeModal(); };
+    document.querySelectorAll('.close-btn').forEach(btn => btn.addEventListener('click', closeModal));
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal?.classList.contains('show')) closeModal();
+    });
 });

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martin Jin | Mechatronics Portfolio</title>
+    <meta name="description" content="Portfolio of Qicong (Martin) Jin, a Mechatronics Engineering student at the University of Auckland — robotics, CAD, control systems, and software projects.">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -67,7 +68,7 @@
                     <h2 class="section-title reveal">Project Timeline</h2>
 
                     <div class="year-group reveal" id="year-2026">
-                        <div class="year-header" onclick="toggleYear('year-2026')">
+                        <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2026">
                             <span>2026</span>
                             <span class="toggle-icon">−</span>
                         </div>
@@ -204,7 +205,7 @@
                     </div>
 
                     <div class="year-group reveal" id="year-2025">
-                        <div class="year-header" onclick="toggleYear('year-2025')">
+                        <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2025">
                             <span>2025</span>
                             <span class="toggle-icon">−</span>
                         </div>
@@ -230,7 +231,7 @@
                     </div>
 
                     <div class="year-group reveal" id="year-2024">
-                        <div class="year-header" onclick="toggleYear('year-2024')">
+                        <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2024">
                             <span>2024</span>
                             <span class="toggle-icon">−</span>
                         </div>
@@ -260,8 +261,8 @@
 
                 <aside class="project-sidebar reveal">
                     <div class="sidebar-block">
-                        <h4>Search</h4>
-                        <input type="text" id="projectSearch" placeholder="Search projects or skills...">
+                        <h4 id="search-label">Search</h4>
+                        <input type="text" id="projectSearch" aria-labelledby="search-label" placeholder="Search projects or skills...">
                     </div>
 
                     <div class="sidebar-block">
@@ -294,16 +295,16 @@
                 <h2 class="section-title">Links & Connect</h2>
                 <div class="links-grid">
                     <a href="mailto:martinjin2016@gmail.com" class="link-btn accent-btn">Email me</a>
-                    <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank">My LinkedIn</a>
-                    <a href="https://github.com/martinjin2016" class="link-btn" target="_blank">My GitHub</a>
+                    <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank" rel="noopener">My LinkedIn</a>
+                    <a href="https://github.com/martinjin2016" class="link-btn" target="_blank" rel="noopener">My GitHub</a>
                 </div>
             </div>
         </section>
     </main>
 
     <div id="project-modal" class="modal-overlay">
-        <div class="modal-window">
-            <button class="close-btn">&times;</button>
+        <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="close-btn" aria-label="Close">&times;</button>
             <h2 id="modal-title"></h2>
             <div class="modal-stats-bar">
                 <div class="stat-item">
