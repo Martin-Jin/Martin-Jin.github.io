@@ -151,11 +151,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Resource Link
+            // Resource Links (live demo + code repo/files)
             if (resourceAction) {
-                resourceAction.innerHTML = card.dataset.resource
-                    ? `<a href="${card.dataset.resource}" target="_blank" rel="noopener" class="link-btn accent-btn">Project files</a>`
-                    : "";
+                let html = "";
+                if (card.dataset.live) {
+                    html += `<a href="${card.dataset.live}" target="_blank" rel="noopener" class="link-btn accent-btn">Live Demo</a>`;
+                }
+                if (card.dataset.resource) {
+                    html += `<a href="${card.dataset.resource}" target="_blank" rel="noopener" class="link-btn">${card.dataset.resourceLabel || 'Project files'}</a>`;
+                }
+                resourceAction.innerHTML = html;
             }
 
             if (modal) {

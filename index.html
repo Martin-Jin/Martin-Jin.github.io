@@ -75,28 +75,34 @@
 
                         <div class="year-content">
                             <div class="project-card" data-title="TaskFlow: Intelligent Auto-Scheduler"
-                                data-resource="https://martin-jin.github.io/taskflow/"
+                                data-live="https://martin-jin.github.io/taskflow/"
+                                data-resource="https://github.com/Martin-Jin/taskflow" data-resource-label="GitHub"
                                 data-image="project_resources/taskflow.png" data-hours="20 hours"
-                                data-what="Building a task management web app that turns a plain task list into an auto-scheduled calendar.|Designing Calendar, Tasks, Board, Gantt, and Stats views over a single shared task data model.|Implementing a 're-balance schedule' feature that automatically re-slots tasks around fixed commitments and blocked time.|Adding manual overrides such as time-blocking so auto-scheduling respects existing plans."
-                                data-how="Building a responsive single-page app with Day/Week/Month calendar views, a kanban-style board, and a Gantt view driven from the same task store.|Implementing scheduling logic that assigns tasks to open time slots based on duration, deadlines, and existing blocked time.|Adding undo/redo history so scheduling changes can be safely reversed.|Deploying as a static site on GitHub Pages."
-                                data-why="To explore automated scheduling as an alternative to manually dragging tasks around a calendar.|To practice designing a single data model that stays consistent across multiple views (calendar, board, Gantt, stats).|To build a genuinely useful personal productivity tool rather than another static to-do list.">
+                                data-what="Building a standalone task manager and time-blocking calendar that automatically carves out when each task gets worked on, balancing deadlines against real free time instead of just sorting a to-do list.|Designing Dashboard, Calendar, Tasks, Board, Gantt, and Stats views over a single shared task data model, with full drag-and-drop, dependencies, and undo/redo.|Adding optional one-click Todoist import and Google Calendar push, plus optional Google sign-in for cross-device sync via Firebase.|Making the app fully responsive down to phone width, with a bottom tab bar and a guided first-launch tour."
+                                data-how="Building a responsive single-page React app with Dashboard, Day/Week/Month calendar views, a kanban-style board with drag-and-drop, and a Gantt view driven from the same task store.|Implementing scheduling and re-balancing logic that assigns tasks to open time slots based on duration, deadlines, and existing blocked time, with a clickable stat popup showing missed/overdue tasks.|Bringing smart-parsing (natural-language due dates, #project and @label shorthand with live autocomplete) to parity with Todoist's own quick-add UX, verified with a Playwright test suite.|Deploying as a static site on GitHub Pages via a GitHub Actions workflow."
+                                data-why="To explore automated scheduling as an alternative to manually dragging tasks around a calendar.|To practice designing a single data model that stays consistent across multiple views (dashboard, calendar, board, Gantt, stats).|To build a genuinely useful personal productivity tool, with optional Todoist/Google Calendar bridges, rather than another static to-do list.">
                                 <div class="card-header">
                                     <h3>TaskFlow: Intelligent Auto-Scheduler</h3>
                                     <span class="timeline-date">July</span>
                                 </div>
-                                <p>A web app that turns a task list into an auto-scheduled calendar, with board and Gantt views.</p>
+                                <p>A task manager and time-blocking calendar that auto-schedules tasks around deadlines and free time, with board, Gantt, and dashboard views.</p>
                                 <div class="skill-pills">
                                     <span class="pill">Web Dev</span>
                                     <span class="pill">UI/UX</span>
                                     <span class="pill">Programming</span>
                                 </div>
+                                <div class="card-links">
+                                    <a href="https://martin-jin.github.io/taskflow/" target="_blank" rel="noopener" class="link-btn accent-btn">Live App</a>
+                                    <a href="https://github.com/Martin-Jin/taskflow" target="_blank" rel="noopener" class="link-btn">GitHub</a>
+                                </div>
                                 <button class="read-more-btn">View Details &rarr;</button>
                             </div>
                             <div class="project-card" data-title="CV Editor: Resume Builder"
-                                data-resource="https://github.com/Martin-Jin/CVEditor"
+                                data-live="https://martin-jin.github.io/CVEditor/"
+                                data-resource="https://github.com/Martin-Jin/CVEditor" data-resource-label="GitHub"
                                 data-image="project_resources/cvEditor.png" data-hours="35 hours"
-                                data-what="Building a structured, click-to-edit CV/resume builder that runs entirely in the browser, with no backend or accounts.|Designing a section-based document model (text blocks, entry lists, skill lists, label lists) that renders consistently wherever a section type is used.|Implementing a single style panel that drives font, spacing, margins, column widths, rules, bullets, and colour for the whole document.|Adding drag-and-drop reordering, full undo/redo, autosave, and JSON/PDF export."
-                                data-how="Using React 19 and Vite for the UI, with Zustand managing document and theme state plus undo/redo history.|Implementing drag-and-drop section reordering with @dnd-kit.|Generating PDFs client-side with html2canvas and jsPDF, keeping the whole build static and deployable to GitHub Pages.|Structuring section types through a shared schema so new section types and style controls can be added without touching existing renderers."
+                                data-what="Building a structured, click-to-edit CV/resume builder that runs entirely in the browser, with no backend or accounts.|Designing a section-based document model (text blocks, entry lists, skill lists, label lists) that renders consistently wherever a section type is used.|Implementing a single style panel that drives font, spacing, margins, column widths, rules, bullets, and colour for the whole document, including a real single-column reordering mode alongside the two-column layout.|Adding drag-and-drop reordering, full undo/redo, autosave, and JSON/PDF export."
+                                data-how="Using React 19 and Vite for the UI, with Zustand managing document and theme state plus undo/redo history.|Implementing drag-and-drop section reordering with @dnd-kit, including a shared reordering model so single-column and two-column layouts stay consistent.|Exporting to PDF via the browser's native print pipeline, keeping the whole build static and deployable to GitHub Pages through a GitHub Actions workflow.|Structuring section types through a shared schema so new section types and style controls can be added without touching existing renderers, and stripping personal content for a clean public release."
                                 data-why="To have a CV tool I fully control, where layout stays consistent while content stays freely editable.|To practice building a maintainable component and state architecture for a non-trivial client-side React app.|To ship something genuinely useful for myself and reusable by others, rather than another to-do list app.">
                                 <div class="card-header">
                                     <h3>CV Editor: Resume Builder</h3>
@@ -107,6 +113,10 @@
                                     <span class="pill">Web Dev</span>
                                     <span class="pill">React</span>
                                     <span class="pill">UI/UX</span>
+                                </div>
+                                <div class="card-links">
+                                    <a href="https://martin-jin.github.io/CVEditor/" target="_blank" rel="noopener" class="link-btn accent-btn">Live App</a>
+                                    <a href="https://github.com/Martin-Jin/CVEditor" target="_blank" rel="noopener" class="link-btn">GitHub</a>
                                 </div>
                                 <button class="read-more-btn">View Details &rarr;</button>
                             </div>
