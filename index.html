@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martin Jin | Mechatronics Portfolio</title>
-    <meta name="description" content="Portfolio of Qicong (Martin) Jin, a Mechatronics Engineering student at the University of Auckland — robotics, CAD, control systems, and software projects.">
+    <meta name="description"
+        content="Portfolio of Qicong (Martin) Jin, a Mechatronics Engineering student at the University of Auckland — robotics, CAD, control systems, and software projects.">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -49,8 +50,10 @@
                     </p>
                     <div class="hero-actions">
                         <a href="mailto:martinjin2016@gmail.com" class="link-btn accent-btn">Email me</a>
-                        <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="https://github.com/martinjin2016" class="link-btn" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank"
+                            rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/martinjin2016" class="link-btn" target="_blank"
+                            rel="noopener">GitHub</a>
                     </div>
                     <p class="about-note">
                         <strong>About this site:</strong> a running log of my engineering projects — robots, CAD,
@@ -78,241 +81,244 @@
                                 data-live="https://martin-jin.github.io/taskflow/"
                                 data-resource="https://github.com/Martin-Jin/taskflow" data-resource-label="GitHub"
                                 data-image="project_resources/taskflow.png" data-hours="20 hours"
-                                data-what="Building a standalone task manager and time-blocking calendar that automatically carves out when each task gets worked on, balancing deadlines against real free time instead of just sorting a to-do list.|Designing Dashboard, Calendar, Tasks, Board, Gantt, and Stats views over a single shared task data model, with full drag-and-drop, dependencies, and undo/redo.|Adding optional one-click Todoist import and Google Calendar push, plus optional Google sign-in for cross-device sync via Firebase.|Making the app fully responsive down to phone width, with a bottom tab bar and a guided first-launch tour."
-                                data-how="Building a responsive single-page React app with Dashboard, Day/Week/Month calendar views, a kanban-style board with drag-and-drop, and a Gantt view driven from the same task store.|Implementing scheduling and re-balancing logic that assigns tasks to open time slots based on duration, deadlines, and existing blocked time, with a clickable stat popup showing missed/overdue tasks.|Bringing smart-parsing (natural-language due dates, #project and @label shorthand with live autocomplete) to parity with Todoist's own quick-add UX, verified with a Playwright test suite.|Deploying as a static site on GitHub Pages via a GitHub Actions workflow."
-                                data-why="To explore automated scheduling as an alternative to manually dragging tasks around a calendar.|To practice designing a single data model that stays consistent across multiple views (dashboard, calendar, board, Gantt, stats).|To build a genuinely useful personal productivity tool, with optional Todoist/Google Calendar bridges, rather than another static to-do list.">
+                                data-what="Building a task manager and time-blocking calendar that turns a task list into a fully scheduled week, automatically balancing deadlines, dependencies, and sub-tasks against real free time instead of just sorting a to-do list.|Designing Dashboard, Calendar, Tasks (List/Board/Gantt), and Stats views over a single shared task/block data model, with drag-and-drop, block locking, dependencies, and full undo/redo.|Adding an AI Quick Add feature where a free-text description (or screenshot) is turned into a reviewable batch of proposed changes — new tasks, sub-tasks, dependencies, or project/label edits — rather than being applied blindly.|Connecting optional Todoist import and two-way Google Calendar sync, plus optional Google sign-in for live cross-device sync via Firebase."
+                                data-how="Layering a capacity engine, an allocator, and a rebalance engine as pure, framework-agnostic logic, scoring tasks by a combined priority/deadline weighting and propagating urgency through dependency chains so a blocker inherits the deadline pressure of whatever's waiting on it.|Making Re-balance non-destructive by partitioning blocks into historical, locked, and unlocked-future before re-running the engine, so manual edits and locks always survive it.|Routing AI Quick Add requests through a self-hosted Cloudflare Worker to a user-supplied Anthropic or Gemini API key (bring-your-own-key), keeping every proposed change behind an explicit review step before it's applied.|Deploying as an installable PWA on GitHub Pages via GitHub Actions, with zero-config mock data so every feature is explorable without any API keys."
+                                data-why="To explore automated scheduling as an alternative to manually dragging tasks around a calendar.|To practice layering a non-trivial scheduling algorithm (capacity, allocation, dependency-aware urgency, rebalancing) as pure logic decoupled from the UI.|To build a genuinely useful personal productivity tool with real Todoist, Google Calendar, and AI-assisted task entry, rather than another static to-do list."
                                 <div class="card-header">
-                                    <h3>TaskFlow: Intelligent Auto-Scheduler</h3>
-                                    <span class="timeline-date">July</span>
-                                </div>
-                                <p>A task manager and time-blocking calendar that auto-schedules tasks around deadlines and free time, with board, Gantt, and dashboard views.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Web Dev</span>
-                                    <span class="pill">UI/UX</span>
-                                    <span class="pill">Programming</span>
-                                </div>
-                                <div class="card-actions">
-                                    <a href="https://martin-jin.github.io/taskflow/" target="_blank" rel="noopener" class="link-btn accent-btn">Live App</a>
-                                    <button class="read-more-btn">View Details &rarr;</button>
-                                </div>
+                                <h3>TaskFlow: Intelligent Auto-Scheduler</h3>
+                                <span class="timeline-date">July</span>
                             </div>
-                            <div class="project-card" data-title="CV Editor: Resume Builder"
-                                data-live="https://martin-jin.github.io/CVEditor/"
-                                data-resource="https://github.com/Martin-Jin/CVEditor" data-resource-label="GitHub"
-                                data-image="project_resources/cvEditor.png" data-hours="35 hours"
-                                data-what="Building a structured, click-to-edit CV/resume builder that runs entirely in the browser, with no backend or accounts.|Designing a section-based document model (text blocks, entry lists, skill lists, label lists) that renders consistently wherever a section type is used.|Implementing a single style panel that drives font, spacing, margins, column widths, rules, bullets, and colour for the whole document, including a real single-column reordering mode alongside the two-column layout.|Adding drag-and-drop reordering, full undo/redo, autosave, and JSON/PDF export."
-                                data-how="Using React 19 and Vite for the UI, with Zustand managing document and theme state plus undo/redo history.|Implementing drag-and-drop section reordering with @dnd-kit, including a shared reordering model so single-column and two-column layouts stay consistent.|Exporting to PDF via the browser's native print pipeline, keeping the whole build static and deployable to GitHub Pages through a GitHub Actions workflow.|Structuring section types through a shared schema so new section types and style controls can be added without touching existing renderers, and stripping personal content for a clean public release."
-                                data-why="To have a CV tool I fully control, where layout stays consistent while content stays freely editable.|To practice building a maintainable component and state architecture for a non-trivial client-side React app.|To ship something genuinely useful for myself and reusable by others, rather than another to-do list app.">
-                                <div class="card-header">
-                                    <h3>CV Editor: Resume Builder</h3>
-                                    <span class="timeline-date">July</span>
-                                </div>
-                                <p>A structured, browser-only CV/resume builder and PDF exporter built with React.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Web Dev</span>
-                                    <span class="pill">React</span>
-                                    <span class="pill">UI/UX</span>
-                                </div>
-                                <div class="card-actions">
-                                    <a href="https://martin-jin.github.io/CVEditor/" target="_blank" rel="noopener" class="link-btn accent-btn">Live App</a>
-                                    <button class="read-more-btn">View Details &rarr;</button>
-                                </div>
+                            <p>A task manager and time-blocking calendar that auto-schedules tasks around deadlines and
+                                free time, with board, Gantt, and dashboard views.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Web Dev</span>
+                                <span class="pill">UI/UX</span>
+                                <span class="pill">Programming</span>
                             </div>
-                            <div class="project-card" data-title="FSAE MPC Path Tracking Simulator"
-                                data-resource="https://github.com/Martin-Jin/fsae_MPCTest"
-                                data-image="project_resources/mpcSimulator.jpg" data-hours="40 hours"
-                                data-what="Building a high-fidelity 2D closed-loop simulator pairing a 24-state nonlinear vehicle plant (Pacejka tyre model, suspension, aero) with a linear time-varying MPC controller.|Implementing an 8-state bicycle model MPC solved via CVXPY/OSQP, with cone-based boundary detection and centreline planning shared with the ROS2 stack.|Developing a CMA-ES based offline weight tuner to automatically optimise MPC cost matrices across synthetic FS-spec corner geometries.|Integrating the controller into the FSDS (Formula Student Driverless Simulator) via ROS2 nodes for closed-loop testing in Unreal Engine."
-                                data-how="Using scipy matrix exponentials for exact Zero-Order-Hold discretisation of the linearised bicycle model.|Applying adaptive gain scheduling to scale MPC cost weights by speed and estimated path curvature.|Structuring a shared rollout core so the offline tuner and live simulator produce identical scores.|Deploying ROS2 nodes with rclpy to bridge perception, planning, and control topics in the FSDS simulator."
-                                data-why="To gain hands-on experience with optimal control theory and convex optimisation for autonomous vehicle path tracking.|To support the F:SAE autonomous team's controls pipeline with a tuned, tested MPC controller.|To deepen my understanding of the gap between simplified control models and high-fidelity vehicle dynamics.">
-                                <div class="card-header">
-                                    <h3>FSAE MPC Path Tracking Simulator</h3>
-                                    <span class="timeline-date">June - July</span>
-                                </div>
-                                <p>Closed-loop MPC simulator and CMA-ES weight tuner for F:SAE autonomous path tracking.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Autonomous vehicles</span>
-                                    <span class="pill">Control Theory</span>
-                                    <span class="pill">Python</span>
-                                    <span class="pill">ROS2</span>
-                                </div>
-                                <button class="read-more-btn">View Details &rarr;</button>
-                            </div>
-                            <div class="project-card" data-title="F:SAE Autonomous Research"
-                                data-image="project_resources/autonomousResearch.jpg" data-hours="20 hours"
-                                data-what="Investigating the technical specifications and functions of various autonomous sensors.|Researching sensor fusion strategies to effectively merge LiDAR and camera data.|Analysing different fusion architectures to determine their impact on perception accuracy."
-                                data-how="Synthesising information from scientific papers and technical documentation.|Breaking down complex research into high-level concepts before investigating specific technical details."
-                                data-why="To support the development of a robust perception pipeline for the F:SAE autonomous team.|To deepen my understanding of how perception systems function in autonomous vehicles.">
-                                <div class="card-header">
-                                    <h3>F:SAE Autonomous Research</h3>
-                                    <span class="timeline-date">May</span>
-                                </div>
-                                <p>Researching sensor fusion strategies for autonomous perception systems.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Autonomous vehicles</span>
-                                    <span class="pill">Research</span>
-                                </div>
-                                <button class="read-more-btn">View Details &rarr;</button>
-                            </div>
-
-                            <div class="project-card" data-title="Mini Warman: Physical Robot"
-                                data-resource="files/warman.mp4"
-                                data-image="project_resources/warmanBuild.jpg" data-hours="30 hours"
-                                data-what="Prototyping and assembling a physical robot designed to transport tennis balls across a competition course.|Wiring electronics such as motors and integrating sensor feedback loops.|Programming robot logic in C++ using the Arduino IDE."
-                                data-how="Using breadboards for rapid electronics testing and circuit validation before final assembly.|Implementing closed-loop control using roller switches for precise mechanical feedback.|Iterating through multiple physical prototypes to refine performance and reliability.|Utilising laser cutters with 3D printers to manufacture our robot."
-                                data-why="To bridge the gap between theoretical design and physical mechatronic implementation.|To understand the full development cycle of a functional engineering project.|To strengthen hands-on skills in electronics and microcontroller programming.">
-                                <div class="card-header">
-                                    <h3>Mini Warman: Robot Build</h3>
-                                    <span class="timeline-date">March - May</span>
-                                </div>
-                                <p>Building and prototyping a physical solution for the Mini Warman competition.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Electronics</span>
-                                    <span class="pill">Programming</span>
-                                    <span class="pill">Manufacturing</span>
-                                </div>
-                                <button class="read-more-btn">View Details &rarr;</button>
-                            </div>
-
-                            <div class="project-card" data-title="Mini Warman CAD Design"
-                                data-image="project_resources/miniWarmanCAD.png" 
-                                data-resource="files/miniWarmanCAD.pdf"
-                                data-hours="12 hours"
-                                data-what="Creating a complete 3D assembly of a ball-transportation robot for the Mini Warman challenge.|Developing an elevator pitch and technical summary of the final design."
-                                data-how="Utilising Fusion 360 to model the robot and manage complex assemblies.|Ideating solutions through functional decomposition to ensure all project requirements were met.|Selecting and narrowing down concepts using MART analysis."
-                                data-why="To improve my understanding of designing for complex mechatronic systems.|To refine my ability to communicate technical designs through professional reports and pitches.">
-                                <div class="card-header">
-                                    <h3>Mini Warman CAD Design</h3>
-                                    <span class="timeline-date">March</span>
-                                </div>
-                                <p>Full 3D modelling and design documentation of a ball-transportation robot.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">CAD</span>
-                                    <span class="pill">Design</span>
-                                    <span class="pill">Electronics</span>
-                                </div>
-                                <button class="read-more-btn">View Details &rarr;</button>
-                            </div>
-                            <div class="project-card" data-title="VEX Autonomous Robot"
-                                data-image="project_resources/vexRobot.jpg" data-hours="25 hours"
-                                data-resource="files/vexRobot.mp4"
-                                data-what="Developing navigation logic for a VEX robot to automate payload delivery.|Implementing sensor-based feedback loops to handle autonomous movement."
-                                data-how="Programming PI controllers in C to manage tasks like accurate distance driving.|Tuning controller gains to optimise system performance.|Accounting for environmental uncertainties like wheel slip and mechanical backlash."
-                                data-why="To gain proficiency in VEX-specific robot programming.|To observe and understand the real-world behaviour of basic controllers within a control system.">
-                                <div class="card-header">
-                                    <h3>VEX Autonomous Robot</h3>
-                                    <span class="timeline-date">March - May</span>
-                                </div>
-                                <p>Implementing sensor feedback and PI controllers for autonomous navigation.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Programming</span>
-                                    <span class="pill">Control Systems</span>
-                                </div>
-                                <button class="read-more-btn">View Details &rarr;</button>
-                            </div>
-
-                            <div class="project-card" data-title="Grocery Tracker App"
-                                data-image="project_resources/grocery.jpg" data-hours="30 hours"
-                                data-resource="https://github.com/Martin-Jin/GroceryTracker"
-                                data-what="Building a native Android application to manage and track household inventory.|Designing a user-friendly interface for adding, tracking, and editing items.|Implementing data persistence to ensure user input is saved locally on the device."
-                                data-how="Developing the application using Java and Android Studio.|Focusing on clean UI/UX design to make daily inventory tracking intuitive.|Applying software engineering principles to effectively manage app state and data flow."
-                                data-why="To explore mobile development and broaden my overall software engineering skill set.|To create a practical, functional tool for personal organisation and inventory management.">
-                                <div class="card-header">
-                                    <h3>Grocery Tracker App</h3>
-                                    <span class="timeline-date">Jan - Mar</span>
-                                </div>
-                                <p>Native Android app for inventory management and household tracking.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">UI/UX</span>
-                                    <span class="pill">App dev</span>
-                                </div>
+                            <div class="card-actions">
+                                <a href="https://martin-jin.github.io/taskflow/" target="_blank" rel="noopener"
+                                    class="link-btn accent-btn">Live App</a>
                                 <button class="read-more-btn">View Details &rarr;</button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="year-group reveal" id="year-2025">
-                        <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2025">
-                            <span>2025</span>
-                            <span class="toggle-icon">−</span>
-                        </div>
-                        <div class="year-content">
-                            <div class="project-card" data-title="Functional Lamp CAD"
-                                data-image="project_resources/balanceLamp.jpg" data-resource="files/balanceLamp.pdf"
-                                data-hours="10 hours"
-                                data-what="Designing a custom desk lamp featuring integrated mechanical joints.|Balancing aesthetic form with practical mechanical functionality.|Generating technical drawings to document the design for manufacturing."
-                                data-how="Utilising Fusion 360 to model the lamp and its moving components.|Taking design inspiration from balancing weights and minimalist forms.|Designing for assembly by minimising part counts and simplifying fasteners."
-                                data-why="To practice product-focused design within a CAD environment.|To further refine my CAD modelling and technical drawing skills.">
-                                <div class="card-header">
-                                    <h3>Functional Lamp CAD</h3>
-                                    <span class="timeline-date">April</span>
-                                </div>
-                                <p>Designing a custom desk lamp with a focus on assembly constraints and aesthetics.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">CAD</span>
-                                    <span class="pill">Design</span>
-                                </div>
+                        <div class="project-card" data-title="CV Editor: Resume Builder"
+                            data-live="https://martin-jin.github.io/CVEditor/"
+                            data-resource="https://github.com/Martin-Jin/CVEditor" data-resource-label="GitHub"
+                            data-image="project_resources/cvEditor.png" data-hours="35 hours"
+                            data-what="Building a structured, click-to-edit CV/resume builder that runs entirely in the browser, with no backend or accounts.|Designing a section-based document model (text blocks, entry lists, skill lists, label lists) that renders consistently wherever a section type is used.|Implementing a single style panel that drives font, spacing, margins, column widths, rules, bullets, and colour for the whole document, including a real single-column reordering mode alongside the two-column layout.|Adding drag-and-drop reordering, full undo/redo, autosave, and JSON/PDF export."
+                            data-how="Using React 19 and Vite for the UI, with Zustand managing document and theme state plus undo/redo history.|Implementing drag-and-drop section reordering with @dnd-kit, including a shared reordering model so single-column and two-column layouts stay consistent.|Exporting to PDF via the browser's native print pipeline, keeping the whole build static and deployable to GitHub Pages through a GitHub Actions workflow.|Structuring section types through a shared schema so new section types and style controls can be added without touching existing renderers, and stripping personal content for a clean public release."
+                            data-why="To have a CV tool I fully control, where layout stays consistent while content stays freely editable.|To practice building a maintainable component and state architecture for a non-trivial client-side React app.|To ship something genuinely useful for myself and reusable by others, rather than another to-do list app.">
+                            <div class="card-header">
+                                <h3>CV Editor: Resume Builder</h3>
+                                <span class="timeline-date">July</span>
+                            </div>
+                            <p>A structured, browser-only CV/resume builder and PDF exporter built with React.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Web Dev</span>
+                                <span class="pill">React</span>
+                                <span class="pill">UI/UX</span>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://martin-jin.github.io/CVEditor/" target="_blank" rel="noopener"
+                                    class="link-btn accent-btn">Live App</a>
                                 <button class="read-more-btn">View Details &rarr;</button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="year-group reveal" id="year-2024">
-                        <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2024">
-                            <span>2024</span>
-                            <span class="toggle-icon">−</span>
-                        </div>
-                        <div class="year-content">
-                            <div class="project-card" data-title="Brew & Bean: Full-Stack Coffee Hub"
-                                data-image="project_resources/coffee.jpg"
-                                data-resource="https://github.com/Martin-Jin/AS3.4-AS3.8-DTECH"
-                                data-what="Developing a responsive web application for a coffee roastery.|Integrating Firebase to manage real-time inventory and stock levels.|Building a secure user authentication system for managing customer orders."
-                                data-how="Using HTML5, CSS3, and JavaScript to build a modern, mobile-first frontend.|Leveraging Firebase Firestore for database queries and persistent storage.|Implementing the Firebase API to handle dynamic menu updates and order processing."
-                                data-why="To learn how to integrate cloud-based backends within web environments.|To create a commercial tool that bridges digital ordering with physical inventory management.|To develop full-stack programming skills through a complete web project.">
-                                <div class="card-header">
-                                    <h3>Brew & Bean: Coffee Hub</h3>
-                                    <span class="timeline-date">March - Dec</span>
-                                </div>
-                                <p>Full-stack web application with real-time database integration and Firebase
-                                    authentication.</p>
-                                <div class="skill-pills">
-                                    <span class="pill">Web Dev</span>
-                                    <span class="pill">Firebase</span>
-                                    <span class="pill">Programming</span>
-                                </div>
-                                <button class="read-more-btn">View Details &rarr;</button>
+                        <div class="project-card" data-title="FSAE MPC Path Tracking Simulator"
+                            data-resource="https://github.com/Martin-Jin/fsae_MPCTest"
+                            data-image="project_resources/mpcSimulator.jpg" data-hours="40 hours"
+                            data-what="Building a high-fidelity 2D closed-loop simulator pairing a 24-state nonlinear vehicle plant (Pacejka tyre model, suspension, aero) with a linear time-varying MPC controller.|Implementing an 8-state bicycle model MPC solved via CVXPY/OSQP, with cone-based boundary detection and centreline planning shared with the ROS2 stack.|Developing a CMA-ES based offline weight tuner to automatically optimise MPC cost matrices across synthetic FS-spec corner geometries.|Integrating the controller into the FSDS (Formula Student Driverless Simulator) via ROS2 nodes for closed-loop testing in Unreal Engine."
+                            data-how="Using scipy matrix exponentials for exact Zero-Order-Hold discretisation of the linearised bicycle model.|Applying adaptive gain scheduling to scale MPC cost weights by speed and estimated path curvature.|Structuring a shared rollout core so the offline tuner and live simulator produce identical scores.|Deploying ROS2 nodes with rclpy to bridge perception, planning, and control topics in the FSDS simulator."
+                            data-why="To gain hands-on experience with optimal control theory and convex optimisation for autonomous vehicle path tracking.|To support the F:SAE autonomous team's controls pipeline with a tuned, tested MPC controller.|To deepen my understanding of the gap between simplified control models and high-fidelity vehicle dynamics.">
+                            <div class="card-header">
+                                <h3>FSAE MPC Path Tracking Simulator</h3>
+                                <span class="timeline-date">June - July</span>
                             </div>
+                            <p>Closed-loop MPC simulator and CMA-ES weight tuner for F:SAE autonomous path tracking.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Autonomous vehicles</span>
+                                <span class="pill">Control Theory</span>
+                                <span class="pill">Python</span>
+                                <span class="pill">ROS2</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+                        <div class="project-card" data-title="F:SAE Autonomous Research"
+                            data-image="project_resources/autonomousResearch.jpg" data-hours="20 hours"
+                            data-what="Investigating the technical specifications and functions of various autonomous sensors.|Researching sensor fusion strategies to effectively merge LiDAR and camera data.|Analysing different fusion architectures to determine their impact on perception accuracy."
+                            data-how="Synthesising information from scientific papers and technical documentation.|Breaking down complex research into high-level concepts before investigating specific technical details."
+                            data-why="To support the development of a robust perception pipeline for the F:SAE autonomous team.|To deepen my understanding of how perception systems function in autonomous vehicles.">
+                            <div class="card-header">
+                                <h3>F:SAE Autonomous Research</h3>
+                                <span class="timeline-date">May</span>
+                            </div>
+                            <p>Researching sensor fusion strategies for autonomous perception systems.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Autonomous vehicles</span>
+                                <span class="pill">Research</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+
+                        <div class="project-card" data-title="Mini Warman: Physical Robot"
+                            data-resource="files/warman.mp4" data-image="project_resources/warmanBuild.jpg"
+                            data-hours="30 hours"
+                            data-what="Prototyping and assembling a physical robot designed to transport tennis balls across a competition course.|Wiring electronics such as motors and integrating sensor feedback loops.|Programming robot logic in C++ using the Arduino IDE."
+                            data-how="Using breadboards for rapid electronics testing and circuit validation before final assembly.|Implementing closed-loop control using roller switches for precise mechanical feedback.|Iterating through multiple physical prototypes to refine performance and reliability.|Utilising laser cutters with 3D printers to manufacture our robot."
+                            data-why="To bridge the gap between theoretical design and physical mechatronic implementation.|To understand the full development cycle of a functional engineering project.|To strengthen hands-on skills in electronics and microcontroller programming.">
+                            <div class="card-header">
+                                <h3>Mini Warman: Robot Build</h3>
+                                <span class="timeline-date">March - May</span>
+                            </div>
+                            <p>Building and prototyping a physical solution for the Mini Warman competition.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Electronics</span>
+                                <span class="pill">Programming</span>
+                                <span class="pill">Manufacturing</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+
+                        <div class="project-card" data-title="Mini Warman CAD Design"
+                            data-image="project_resources/miniWarmanCAD.png" data-resource="files/miniWarmanCAD.pdf"
+                            data-hours="12 hours"
+                            data-what="Creating a complete 3D assembly of a ball-transportation robot for the Mini Warman challenge.|Developing an elevator pitch and technical summary of the final design."
+                            data-how="Utilising Fusion 360 to model the robot and manage complex assemblies.|Ideating solutions through functional decomposition to ensure all project requirements were met.|Selecting and narrowing down concepts using MART analysis."
+                            data-why="To improve my understanding of designing for complex mechatronic systems.|To refine my ability to communicate technical designs through professional reports and pitches.">
+                            <div class="card-header">
+                                <h3>Mini Warman CAD Design</h3>
+                                <span class="timeline-date">March</span>
+                            </div>
+                            <p>Full 3D modelling and design documentation of a ball-transportation robot.</p>
+                            <div class="skill-pills">
+                                <span class="pill">CAD</span>
+                                <span class="pill">Design</span>
+                                <span class="pill">Electronics</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+                        <div class="project-card" data-title="VEX Autonomous Robot"
+                            data-image="project_resources/vexRobot.jpg" data-hours="25 hours"
+                            data-resource="files/vexRobot.mp4"
+                            data-what="Developing navigation logic for a VEX robot to automate payload delivery.|Implementing sensor-based feedback loops to handle autonomous movement."
+                            data-how="Programming PI controllers in C to manage tasks like accurate distance driving.|Tuning controller gains to optimise system performance.|Accounting for environmental uncertainties like wheel slip and mechanical backlash."
+                            data-why="To gain proficiency in VEX-specific robot programming.|To observe and understand the real-world behaviour of basic controllers within a control system.">
+                            <div class="card-header">
+                                <h3>VEX Autonomous Robot</h3>
+                                <span class="timeline-date">March - May</span>
+                            </div>
+                            <p>Implementing sensor feedback and PI controllers for autonomous navigation.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Programming</span>
+                                <span class="pill">Control Systems</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+
+                        <div class="project-card" data-title="Grocery Tracker App"
+                            data-image="project_resources/grocery.jpg" data-hours="30 hours"
+                            data-resource="https://github.com/Martin-Jin/GroceryTracker"
+                            data-what="Building a native Android application to manage and track household inventory.|Designing a user-friendly interface for adding, tracking, and editing items.|Implementing data persistence to ensure user input is saved locally on the device."
+                            data-how="Developing the application using Java and Android Studio.|Focusing on clean UI/UX design to make daily inventory tracking intuitive.|Applying software engineering principles to effectively manage app state and data flow."
+                            data-why="To explore mobile development and broaden my overall software engineering skill set.|To create a practical, functional tool for personal organisation and inventory management.">
+                            <div class="card-header">
+                                <h3>Grocery Tracker App</h3>
+                                <span class="timeline-date">Jan - Mar</span>
+                            </div>
+                            <p>Native Android app for inventory management and household tracking.</p>
+                            <div class="skill-pills">
+                                <span class="pill">UI/UX</span>
+                                <span class="pill">App dev</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
                         </div>
                     </div>
                 </div>
 
-                <aside class="project-sidebar reveal">
-                    <div class="sidebar-block">
-                        <h4 id="search-label">Search</h4>
-                        <input type="text" id="projectSearch" aria-labelledby="search-label" placeholder="Search projects or skills...">
+                <div class="year-group reveal" id="year-2025">
+                    <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2025">
+                        <span>2025</span>
+                        <span class="toggle-icon">−</span>
                     </div>
-
-                    <div class="sidebar-block">
-                        <h4>Filter by Type</h4>
-                        <div class="filter-pills" id="skillFilter">
-                            <button class="filter-pill active" data-filter="all">All</button>
-                            <button class="filter-pill" data-filter="CAD">CAD</button>
-                            <button class="filter-pill" data-filter="Control">Control systems</button>
-                            <button class="filter-pill" data-filter="Programming">Programming</button>
-                            <button class="filter-pill" data-filter="Design">Design</button>
-                            <button class="filter-pill" data-filter="Web Dev">Web Dev</button>
-                            <button class="filter-pill" data-filter="Autonomous">Autonomous vehicles</button>
+                    <div class="year-content">
+                        <div class="project-card" data-title="Functional Lamp CAD"
+                            data-image="project_resources/balanceLamp.jpg" data-resource="files/balanceLamp.pdf"
+                            data-hours="10 hours"
+                            data-what="Designing a custom desk lamp featuring integrated mechanical joints.|Balancing aesthetic form with practical mechanical functionality.|Generating technical drawings to document the design for manufacturing."
+                            data-how="Utilising Fusion 360 to model the lamp and its moving components.|Taking design inspiration from balancing weights and minimalist forms.|Designing for assembly by minimising part counts and simplifying fasteners."
+                            data-why="To practice product-focused design within a CAD environment.|To further refine my CAD modelling and technical drawing skills.">
+                            <div class="card-header">
+                                <h3>Functional Lamp CAD</h3>
+                                <span class="timeline-date">April</span>
+                            </div>
+                            <p>Designing a custom desk lamp with a focus on assembly constraints and aesthetics.</p>
+                            <div class="skill-pills">
+                                <span class="pill">CAD</span>
+                                <span class="pill">Design</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="sidebar-block highlights-block">
-                        <h4>Project Highlights</h4>
-                        <ul class="highlight-list">
-                            <li><a href="#year-2026" class="highlight-link">CV Editor: Resume Builder</a></li>
-                            <li><a href="#year-2026" class="highlight-link">FSAE MPC Path Tracking Simulator</a></li>
-                            <li><a href="#year-2026" class="highlight-link">Mini Warman Build</a></li>
-                        </ul>
+                <div class="year-group reveal" id="year-2024">
+                    <div class="year-header" role="button" tabindex="0" aria-expanded="true" data-year="year-2024">
+                        <span>2024</span>
+                        <span class="toggle-icon">−</span>
                     </div>
-                </aside>
+                    <div class="year-content">
+                        <div class="project-card" data-title="Brew & Bean: Full-Stack Coffee Hub"
+                            data-image="project_resources/coffee.jpg"
+                            data-resource="https://github.com/Martin-Jin/AS3.4-AS3.8-DTECH"
+                            data-what="Developing a responsive web application for a coffee roastery.|Integrating Firebase to manage real-time inventory and stock levels.|Building a secure user authentication system for managing customer orders."
+                            data-how="Using HTML5, CSS3, and JavaScript to build a modern, mobile-first frontend.|Leveraging Firebase Firestore for database queries and persistent storage.|Implementing the Firebase API to handle dynamic menu updates and order processing."
+                            data-why="To learn how to integrate cloud-based backends within web environments.|To create a commercial tool that bridges digital ordering with physical inventory management.|To develop full-stack programming skills through a complete web project.">
+                            <div class="card-header">
+                                <h3>Brew & Bean: Coffee Hub</h3>
+                                <span class="timeline-date">March - Dec</span>
+                            </div>
+                            <p>Full-stack web application with real-time database integration and Firebase
+                                authentication.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Web Dev</span>
+                                <span class="pill">Firebase</span>
+                                <span class="pill">Programming</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="project-sidebar reveal">
+                <div class="sidebar-block">
+                    <h4 id="search-label">Search</h4>
+                    <input type="text" id="projectSearch" aria-labelledby="search-label"
+                        placeholder="Search projects or skills...">
+                </div>
+
+                <div class="sidebar-block">
+                    <h4>Filter by Type</h4>
+                    <div class="filter-pills" id="skillFilter">
+                        <button class="filter-pill active" data-filter="all">All</button>
+                        <button class="filter-pill" data-filter="CAD">CAD</button>
+                        <button class="filter-pill" data-filter="Control">Control systems</button>
+                        <button class="filter-pill" data-filter="Programming">Programming</button>
+                        <button class="filter-pill" data-filter="Design">Design</button>
+                        <button class="filter-pill" data-filter="Web Dev">Web Dev</button>
+                        <button class="filter-pill" data-filter="Autonomous">Autonomous vehicles</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-block highlights-block">
+                    <h4>Project Highlights</h4>
+                    <ul class="highlight-list">
+                        <li><a href="#year-2026" class="highlight-link">CV Editor: Resume Builder</a></li>
+                        <li><a href="#year-2026" class="highlight-link">FSAE MPC Path Tracking Simulator</a></li>
+                        <li><a href="#year-2026" class="highlight-link">Mini Warman Build</a></li>
+                    </ul>
+                </div>
+            </aside>
             </div>
         </section>
 
@@ -321,8 +327,10 @@
                 <h2 class="section-title">Links & Connect</h2>
                 <div class="links-grid">
                     <a href="mailto:martinjin2016@gmail.com" class="link-btn accent-btn">Email me</a>
-                    <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank" rel="noopener">My LinkedIn</a>
-                    <a href="https://github.com/martinjin2016" class="link-btn" target="_blank" rel="noopener">My GitHub</a>
+                    <a href="https://www.linkedin.com/in/qicong-jin/" class="link-btn" target="_blank" rel="noopener">My
+                        LinkedIn</a>
+                    <a href="https://github.com/martinjin2016" class="link-btn" target="_blank" rel="noopener">My
+                        GitHub</a>
                 </div>
             </div>
         </section>
