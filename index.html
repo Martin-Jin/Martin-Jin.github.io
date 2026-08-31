@@ -65,6 +65,55 @@
         </section>
 
         <section id="projects" class="section bg-light">
+            <div class="projects-wrapper">
+            <div class="container featured-section reveal">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="featured-grid">
+                    <div class="featured-card">
+                        <div class="featured-img">
+                            <img src="project_resources/taskflow.png" alt="TaskFlow: Intelligent Auto-Scheduler">
+                        </div>
+                        <div class="featured-body">
+                            <h3>TaskFlow: Intelligent Auto-Scheduler</h3>
+                            <p>A task manager and time-blocking calendar that auto-schedules tasks around deadlines
+                                and free time, with board, Gantt, and dashboard views.</p>
+                            <div class="card-actions">
+                                <a href="https://martin-jin.github.io/taskflow/" target="_blank" rel="noopener"
+                                    class="link-btn accent-btn">Live App</a>
+                                <button class="read-more-btn featured-btn" data-target="proj-taskflow">View Details
+                                    &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-card">
+                        <div class="featured-img">
+                            <img src="project_resources/mpcSimulator.jpg" alt="FSAE MPC Path Tracking Simulator">
+                        </div>
+                        <div class="featured-body">
+                            <h3>FSAE MPC Path Tracking Simulator</h3>
+                            <p>Closed-loop MPC simulator and CMA-ES weight tuner for F:SAE autonomous path tracking.
+                            </p>
+                            <div class="card-actions">
+                                <button class="read-more-btn featured-btn" data-target="proj-fsae-mpc">View Details
+                                    &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-card">
+                        <div class="featured-img">
+                            <img src="project_resources/warmanBuild.jpg" alt="Mini Warman: Robot Build">
+                        </div>
+                        <div class="featured-body">
+                            <h3>Mini Warman: Robot Build</h3>
+                            <p>Building and prototyping a physical solution for the Mini Warman competition.</p>
+                            <div class="card-actions">
+                                <button class="read-more-btn featured-btn" data-target="proj-mini-warman-build">View
+                                    Details &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container project-layout">
 
                 <div class="main-timeline">
@@ -77,7 +126,26 @@
                         </div>
 
                         <div class="year-content">
-                            <div class="project-card" data-title="TaskFlow: Intelligent Auto-Scheduler"
+                            <div class="project-card" data-title="Music Player: Android App with Cloud Sync"
+                                data-image="project_resources/musicPlayerApp.jpg" data-image-fit="contain"
+                                data-hours="5 hours"
+                                data-what="Building a minimalistic Android music player that scans a single user-picked folder via Storage Access Framework, with every subfolder automatically becoming its own playlist.|Implementing full playback with Media3 (ExoPlayer + MediaSession): a persistent mini-player, a full now-playing screen with shuffle/seek, and search across songs and playlists.|Adding a Cloudflare-backed cloud sync layer (Workers + R2 for audio, D1 for metadata) so adding or deleting music syncs across devices automatically every 6 hours on Wi-Fi, or on demand."
+                                data-how="Scanning only a user-chosen folder through Storage Access Framework, so no whole-device scan or runtime permissions are needed, with a content-hash cache to skip rescanning unchanged files.|Structuring playback around a Media3 service and player view model, kept separate from the SAF-based data layer and the sync layer.|Building a Cloudflare Worker backend bound to an R2 bucket and D1 database that diffs a manifest to decide what to upload or download, with a 30-day tombstone window before deletions are permanently purged.|Scheduling background sync with WorkManager every 6 hours on Wi-Fi, alongside a manual sync trigger in Settings."
+                                data-why="To have a lightweight music player that stays in sync across my own devices without depending on a commercial streaming service.|To get hands-on with Media3/ExoPlayer playback and MediaSession integration on Android.|To practice designing a sync protocol — manifest diffing, tombstones, cost guards — against a serverless Cloudflare backend.">
+                                <div class="card-header">
+                                    <h3>Music Player: Android App with Cloud Sync</h3>
+                                    <span class="timeline-date">September</span>
+                                </div>
+                                <p>A minimalistic Android music player with folder-based playlists and Cloudflare-backed
+                                    cross-device cloud sync.</p>
+                                <div class="skill-pills">
+                                    <span class="pill">App dev</span>
+                                    <span class="pill">Cloudflare</span>
+                                    <span class="pill">Programming</span>
+                                </div>
+                                <button class="read-more-btn">View Details &rarr;</button>
+                            </div>
+                            <div class="project-card" id="proj-taskflow" data-title="TaskFlow: Intelligent Auto-Scheduler"
                                 data-live="https://martin-jin.github.io/taskflow/"
                                 data-resource="https://github.com/Martin-Jin/taskflow" data-resource-label="GitHub"
                                 data-image="project_resources/taskflow.png" data-hours="20 hours"
@@ -124,7 +192,25 @@
                                 <button class="read-more-btn">View Details &rarr;</button>
                             </div>
                         </div>
-                        <div class="project-card" data-title="FSAE MPC Path Tracking Simulator"
+                        <div class="project-card" data-title="Workshop Practice"
+                            data-images="project_resources/workshopPracticeHammer.jpg,project_resources/workshopPracticeMotor.jpg"
+                            data-image="project_resources/workshopPracticeHammer.jpg" data-hours="20 hours"
+                            data-what="Machining an engraved aluminium hammer from raw stock, turning the round head on a lathe and milling the handle to shape.|Welding a sheet-metal pencil case as an introduction to arc/MIG welding.|Building a small brushless DC motor rig: soldering the driver electronics, 3D printing the coil housing, laser cutting the acrylic cover, and fabricating the base enclosure from sheet metal."
+                            data-how="Turning the cylindrical hammer head to size on a manual lathe, then milling the handle profile and knurled grip on a milling machine.|Practicing bead control and joint prep to weld flat sheet steel into a boxed pencil case.|Soldering the motor driver PCB and wiring it to the coil and Hall sensor, then 3D printing mounts and laser cutting an acrylic enclosure around it.|Marking out a flat metal sheet, cutting the four corners, and folding it into a box to house the motor electronics."
+                            data-why="To build hands-on fluency across the core mechatronics manufacturing processes: milling, turning, welding, soldering, 3D printing, laser cutting, and sheet-metal fabrication.|To develop physical intuition for tolerances, fits, and material behaviour that's easy to skip when only ever designing in CAD.|To practice folding a functional enclosure from a single flat sheet, a technique directly transferable to future housing and chassis design.">
+                            <div class="card-header">
+                                <h3>Workshop Practice</h3>
+                                <span class="timeline-date">July</span>
+                            </div>
+                            <p>University workshop course covering milling, turning, welding, and fabrication — a
+                                machined hammer and a soldered, 3D-printed, laser-cut brushless DC motor build.</p>
+                            <div class="skill-pills">
+                                <span class="pill">Manufacturing</span>
+                                <span class="pill">Electronics</span>
+                            </div>
+                            <button class="read-more-btn">View Details &rarr;</button>
+                        </div>
+                        <div class="project-card" id="proj-fsae-mpc" data-title="FSAE MPC Path Tracking Simulator"
                             data-resource="https://github.com/Martin-Jin/fsae_MPCTest"
                             data-image="project_resources/mpcSimulator.jpg" data-hours="40 hours"
                             data-what="Building a high-fidelity 2D closed-loop simulator pairing a 24-state nonlinear vehicle plant (Pacejka tyre model, suspension, aero) with a linear time-varying MPC controller.|Implementing an 8-state bicycle model MPC solved via CVXPY/OSQP, with cone-based boundary detection and centreline planning shared with the ROS2 stack.|Developing a CMA-ES based offline weight tuner to automatically optimise MPC cost matrices across synthetic FS-spec corner geometries.|Integrating the controller into the FSDS (Formula Student Driverless Simulator) via ROS2 nodes for closed-loop testing in Unreal Engine."
@@ -160,7 +246,7 @@
                             <button class="read-more-btn">View Details &rarr;</button>
                         </div>
 
-                        <div class="project-card" data-title="Mini Warman: Physical Robot"
+                        <div class="project-card" id="proj-mini-warman-build" data-title="Mini Warman: Physical Robot"
                             data-resource="files/warman.mp4" data-image="project_resources/warmanBuild.jpg"
                             data-hours="30 hours"
                             data-what="Prototyping and assembling a physical robot designed to transport tennis balls across a competition course.|Wiring electronics such as motors and integrating sensor feedback loops.|Programming robot logic in C++ using the Arduino IDE."
@@ -313,12 +399,13 @@
                 <div class="sidebar-block highlights-block">
                     <h4>Project Highlights</h4>
                     <ul class="highlight-list">
-                        <li><a href="#year-2026" class="highlight-link">CV Editor: Resume Builder</a></li>
+                        <li><a href="#year-2026" class="highlight-link">TaskFlow: Intelligent Auto-Scheduler</a></li>
                         <li><a href="#year-2026" class="highlight-link">FSAE MPC Path Tracking Simulator</a></li>
                         <li><a href="#year-2026" class="highlight-link">Mini Warman Build</a></li>
                     </ul>
                 </div>
             </aside>
+            </div>
             </div>
         </section>
 

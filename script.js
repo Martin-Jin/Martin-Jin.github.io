@@ -110,63 +110,82 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    document.querySelectorAll('.read-more-btn').forEach(btn => {
+    const openProjectModal = (card) => {
+        // Update Title
+        if (modalTitle) modalTitle.innerText = card.dataset.title;
+
+        // Update Image(s)
+        if (imgPlaceholder) {
+            if (card.dataset.images) {
+                const srcs = card.dataset.images.split(',').map(s => s.trim()).filter(Boolean);
+                imgPlaceholder.innerHTML = srcs.map(src => `<img src="${src}" alt="${card.dataset.title}">`).join('');
+                imgPlaceholder.classList.add('gallery');
+            } else if (card.dataset.image) {
+                imgPlaceholder.innerHTML = `<img src="${card.dataset.image}" alt="${card.dataset.title}">`;
+                imgPlaceholder.classList.remove('gallery');
+                imgPlaceholder.classList.toggle('contain', card.dataset.imageFit === 'contain');
+            } else {
+                imgPlaceholder.innerHTML = 'Project Visual';
+                imgPlaceholder.classList.remove('gallery', 'contain');
+            }
+        }
+
+        // Update Stats Bar
+        const dateText = card.querySelector('.timeline-date').innerText;
+
+        if (modalHours) modalHours.innerText = card.dataset.hours || "TBD";
+        if (modalDate) modalDate.innerText = dateText;
+
+        // Populate Content Lists (What/How/Why)
+        createList('modal-what', card.dataset.what);
+        createList('modal-how', card.dataset.how);
+        createList('modal-why', card.dataset.why);
+
+        // Skills Pills
+        if (skillsContainer) {
+            skillsContainer.innerHTML = "";
+            if (card.dataset.skills) {
+                card.dataset.skills.split(',').forEach(s => {
+                    const span = document.createElement('span');
+                    span.className = 'pill';
+                    span.innerText = s.trim();
+                    skillsContainer.appendChild(span);
+                });
+            }
+        }
+
+        // Resource Links (live demo + code repo/files)
+        if (resourceAction) {
+            let html = "";
+            if (card.dataset.live) {
+                html += `<a href="${card.dataset.live}" target="_blank" rel="noopener" class="link-btn accent-btn">Live Demo</a>`;
+            }
+            if (card.dataset.resource) {
+                html += `<a href="${card.dataset.resource}" target="_blank" rel="noopener" class="link-btn">${card.dataset.resourceLabel || 'Project files'}</a>`;
+            }
+            resourceAction.innerHTML = html;
+        }
+
+        if (modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    document.querySelectorAll('.project-card .read-more-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const card = e.target.closest('.project-card');
             if (!card) return;
+            openProjectModal(card);
+        });
+    });
 
-            // Update Title
-            if (modalTitle) modalTitle.innerText = card.dataset.title;
-
-            // Update Image
-            if (imgPlaceholder) {
-                if (card.dataset.image) {
-                    imgPlaceholder.innerHTML = `<img src="${card.dataset.image}" alt="${card.dataset.title}">`;
-                } else {
-                    imgPlaceholder.innerHTML = 'Project Visual';
-                }
-            }
-
-            // Update Stats Bar
-            const dateText = card.querySelector('.timeline-date').innerText;
-
-            if (modalHours) modalHours.innerText = card.dataset.hours || "TBD";
-            if (modalDate) modalDate.innerText = dateText;
-
-            // Populate Content Lists (What/How/Why)
-            createList('modal-what', card.dataset.what);
-            createList('modal-how', card.dataset.how);
-            createList('modal-why', card.dataset.why);
-
-            // Skills Pills
-            if (skillsContainer) {
-                skillsContainer.innerHTML = "";
-                if (card.dataset.skills) {
-                    card.dataset.skills.split(',').forEach(s => {
-                        const span = document.createElement('span');
-                        span.className = 'pill';
-                        span.innerText = s.trim();
-                        skillsContainer.appendChild(span);
-                    });
-                }
-            }
-
-            // Resource Links (live demo + code repo/files)
-            if (resourceAction) {
-                let html = "";
-                if (card.dataset.live) {
-                    html += `<a href="${card.dataset.live}" target="_blank" rel="noopener" class="link-btn accent-btn">Live Demo</a>`;
-                }
-                if (card.dataset.resource) {
-                    html += `<a href="${card.dataset.resource}" target="_blank" rel="noopener" class="link-btn">${card.dataset.resourceLabel || 'Project files'}</a>`;
-                }
-                resourceAction.innerHTML = html;
-            }
-
-            if (modal) {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
+    // Featured Projects section: buttons reference a full project-card by id
+    // and reuse the same modal, so the write-up only lives in one place.
+    document.querySelectorAll('.featured-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = document.getElementById(btn.dataset.target);
+            if (card) openProjectModal(card);
         });
     });
 
