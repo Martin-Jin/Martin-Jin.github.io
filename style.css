@@ -142,7 +142,7 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
 
 /* Year Collapse Logic */
 .year-content {
-    max-height: 2000px; /* Large enough to fit content */
+    max-height: 10000px; /* Must exceed the tallest year group, or its last cards are clipped (2026 is about 3500px on desktop and taller on phones) */
     overflow: hidden;
     transition: max-height 0.4s ease-in-out, opacity 0.3s;
     opacity: 1;
@@ -156,7 +156,7 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
 }
 
 /* Cards */
-.project-card {
+.project-card, .career-card {
     background: var(--card-bg); border: 1px solid var(--card-border); padding: var(--card-padding); border-radius: var(--card-radius);
     margin-bottom: 25px; transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -164,7 +164,18 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
 .project-card.hidden { display: none; margin-bottom: 0; }
 .year-group.hidden { display: none; }
 
-.project-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow-hover); }
+.project-card:hover, .career-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow-hover); }
+
+/* Career entries */
+.section-intro { color: var(--text-muted); max-width: 700px; margin: -30px 0 40px; }
+.career-role { color: var(--text-muted); font-weight: 600; font-size: var(--font-size-sm); margin-bottom: var(--space-2); }
+.career-media { display: flex; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-6); }
+.career-media figure { flex: 1 1 200px; max-width: 280px; }
+.career-media video {
+    width: 100%; aspect-ratio: 9 / 16; object-fit: contain; display: block;
+    background: var(--text-main); border-radius: var(--radius-md);
+}
+.career-media figcaption { font-size: var(--font-size-sm); color: var(--text-muted); margin-top: var(--space-2); line-height: 1.5; }
 .card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
 .timeline-date { font-size: 0.9rem; color: var(--accent); font-weight: 600; }
 
@@ -244,6 +255,8 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
     border-radius: 6px;
 }
 
+.stat-item[hidden] { display: none; }
+
 .stat-icon {
     font-size: 1rem;
     color: var(--accent);
@@ -320,7 +333,7 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
     .featured-grid { grid-template-columns: 1fr; }
     
     /* Ensure cards and blocks don't exceed container width */
-    .project-card, .sidebar-block, .modal-window { 
+    .project-card, .career-card, .sidebar-block, .modal-window {
         padding: 25px; 
         box-sizing: border-box;
     }
@@ -352,6 +365,9 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
     border-left: 2px solid var(--border);
     padding-left: 15px;
 }
+
+.timeline-nav { transition: opacity 0.3s ease; }
+.timeline-nav.is-hidden { opacity: 0; pointer-events: none; }
 
 .timeline-nav-item {
     text-decoration: none;
@@ -429,23 +445,64 @@ nav { display: flex; justify-content: center; gap: 50px; padding: 25px; }
     border-radius: 15px;
 }
 
-/* Gallery mode holds mixed-aspect screenshots (e.g. a tall phone screen next
-   to a wide dashboard capture) — stacked with each image at its own natural
-   size instead of both cropped into equal-height tiles. */
+/* Gallery mode is a horizontal slider for mixed-aspect images (e.g. a tall phone
+   screen next to a wide photo). Each slide fills the track and shows its image whole
+   (contain), so nothing is cropped. Scroll-snap gives native swipe on touch screens. */
 .image-placeholder.gallery {
+    --gallery-img-h: 340px;
+    position: relative;
+    display: block;
     height: auto;
+    padding: 0;
+}
+.gallery-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain; /* a swipe at either end must not scroll the modal or page sideways */
+    scrollbar-width: none;
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always; /* one swipe moves one image */
+    display: flex;
     flex-direction: column;
-    padding: 20px;
-    gap: 16px;
+    background: var(--color-white);
 }
 .image-placeholder.gallery img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 420px;
+    width: 100%;
+    height: var(--gallery-img-h);
     object-fit: contain;
-    background: white;
-    border-radius: 10px;
+    border-radius: 0;
+}
+.gallery-slide figcaption {
+    padding: var(--space-3) var(--space-6) var(--space-4);
+    font-size: var(--font-size-sm); line-height: 1.5;
+    color: var(--text-muted); text-align: center;
+}
+.gallery-btn {
+    position: absolute; top: calc(var(--gallery-img-h) / 2); transform: translateY(-50%); /* centred on the image, not the caption */
+    width: 44px; height: 44px; /* 44px is the minimum comfortable touch target */
+    border: 1px solid var(--border); border-radius: var(--radius-full);
+    background: rgb(255 255 255 / 0.9); color: var(--text-main);
+    font-size: 1.6rem; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+.gallery-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.gallery-btn:disabled { opacity: 0.35; cursor: default; }
+.gallery-btn[hidden], .gallery-count[hidden] { display: none; }
+.gallery-prev { left: var(--space-3); }
+.gallery-next { right: var(--space-3); }
+.gallery-count {
+    position: absolute; top: calc(var(--gallery-img-h) - var(--space-3)); left: 50%; transform: translate(-50%, -100%);
+    background: rgb(15 23 42 / 0.7); color: var(--color-white);
+    font-size: var(--font-size-sm); font-weight: 600; padding: 2px 12px; border-radius: var(--radius-full);
+}
+@media (max-width: 768px) {
+    .image-placeholder.gallery { --gallery-img-h: 240px; }
 }
 
 /* Single-image contain mode: for a screenshot (e.g. a phone UI) that would

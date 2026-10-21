@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearSections = document.querySelectorAll('.year-group');
     const navLinks = document.querySelectorAll('.nav-link');
     const timelineItems = document.querySelectorAll('.timeline-nav-item');
+    const timelineNav = document.querySelector('.timeline-nav');
 
     const handleScroll = () => {
         let currentSection = "";
@@ -76,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // The year links only cover project years, so they would mislead beside the career timeline.
+        if (timelineNav) timelineNav.classList.toggle('is-hidden', currentSection === 'careers');
         navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${currentSection}`));
         timelineItems.forEach(item => item.classList.toggle('active', item.getAttribute('href') === `#${currentYear}`));
     };
@@ -88,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = document.getElementById('modal-title');
     const imgPlaceholder = document.querySelector('.image-placeholder');
     const modalHours = document.getElementById('modal-hours');
+    const modalHoursItem = document.getElementById('modal-hours-item');
+    const modalRole = document.getElementById('modal-role');
+    const modalRoleItem = document.getElementById('modal-role-item');
     const modalDate = document.getElementById('modal-date-display');
     const skillsContainer = document.getElementById('modal-skills');
     const resourceAction = document.getElementById('modal-resource-action');
@@ -110,16 +116,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Horizontal slider: native scroll-snap handles swipe on touch screens, and the buttons and arrow keys
+    // scroll the same track, so every input path moves the same way.
+    const buildGallery = (srcs, title, captions) => {
+        const count = srcs.length;
+        imgPlaceholder.innerHTML = `
+            <div class="gallery-track" tabindex="0" role="group" aria-roledescription="carousel" aria-label="${title} images">
+                ${srcs.map((src, i) => `<figure class="gallery-slide"><img src="${src}" alt="${title}, image ${i + 1} of ${count}">${captions[i] ? `<figcaption>${captions[i]}</figcaption>` : ''}</figure>`).join('')}
+            </div>
+            <button type="button" class="gallery-btn gallery-prev" aria-label="Previous image">&lsaquo;</button>
+            <button type="button" class="gallery-btn gallery-next" aria-label="Next image">&rsaquo;</button>
+            <span class="gallery-count" aria-live="polite"></span>`;
+
+        const track = imgPlaceholder.querySelector('.gallery-track');
+        const prev = imgPlaceholder.querySelector('.gallery-prev');
+        const next = imgPlaceholder.querySelector('.gallery-next');
+        const counter = imgPlaceholder.querySelector('.gallery-count');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        // The modal is still hidden (display: none) when this runs, so the track has no width yet.
+        const currentIndex = () => track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) : 0;
+        const update = () => {
+            const i = currentIndex();
+            counter.textContent = `${i + 1} / ${count}`;
+            prev.disabled = i <= 0;
+            next.disabled = i >= count - 1;
+        };
+        const go = (step) => {
+            const target = Math.min(Math.max(currentIndex() + step, 0), count - 1);
+            track.scrollTo({ left: target * track.clientWidth, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+        };
+
+        prev.addEventListener('click', () => go(-1));
+        next.addEventListener('click', () => go(1));
+        track.addEventListener('scroll', update, { passive: true });
+        track.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        });
+
+        if (count < 2) {
+            prev.hidden = true;
+            next.hidden = true;
+            counter.hidden = true;
+        }
+        update();
+        return update;
+    };
+
     const openProjectModal = (card) => {
         // Update Title
         if (modalTitle) modalTitle.innerText = card.dataset.title;
 
         // Update Image(s)
+        let refreshGallery = null;
         if (imgPlaceholder) {
             if (card.dataset.images) {
                 const srcs = card.dataset.images.split(',').map(s => s.trim()).filter(Boolean);
-                imgPlaceholder.innerHTML = srcs.map(src => `<img src="${src}" alt="${card.dataset.title}">`).join('');
+                imgPlaceholder.classList.remove('contain');
                 imgPlaceholder.classList.add('gallery');
+                const captions = (card.dataset.imageCaptions || '').split('|').map(s => s.trim());
+                refreshGallery = buildGallery(srcs, card.dataset.title, captions);
             } else if (card.dataset.image) {
                 imgPlaceholder.innerHTML = `<img src="${card.dataset.image}" alt="${card.dataset.title}">`;
                 imgPlaceholder.classList.remove('gallery');
@@ -133,6 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Stats Bar
         const dateText = card.querySelector('.timeline-date').innerText;
 
+        // Career entries show a role in place of the hours estimate.
+        const isCareer = card.classList.contains('career-card');
+        if (modalHoursItem) modalHoursItem.hidden = isCareer;
+        if (modalRoleItem) modalRoleItem.hidden = !isCareer;
+        if (modalRole) modalRole.innerText = card.dataset.role || "";
         if (modalHours) modalHours.innerText = card.dataset.hours || "TBD";
         if (modalDate) modalDate.innerText = dateText;
 
@@ -140,6 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
         createList('modal-what', card.dataset.what);
         createList('modal-how', card.dataset.how);
         createList('modal-why', card.dataset.why);
+        // Next Steps is optional, so the section stays hidden for cards without data-next.
+        createList('modal-next', card.dataset.next);
+        const nextSection = document.getElementById('modal-next-section');
+        if (nextSection) nextSection.hidden = !card.dataset.next;
 
         // Skills Pills
         if (skillsContainer) {
@@ -169,12 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modal) {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            if (refreshGallery) refreshGallery();
         }
     };
 
-    document.querySelectorAll('.project-card .read-more-btn').forEach(btn => {
+    document.querySelectorAll('.project-card .read-more-btn, .career-card .read-more-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const card = e.target.closest('.project-card');
+            const card = e.target.closest('.project-card, .career-card');
             if (!card) return;
             openProjectModal(card);
         });
@@ -233,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3. Automatically sync data-skills from the visible UI pills for filtering
-    projectCards.forEach(card => {
+    document.querySelectorAll('.project-card, .career-card').forEach(card => {
         const pills = card.querySelectorAll('.skill-pills .pill');
         const skillList = Array.from(pills).map(pill => pill.innerText.trim());
         card.dataset.skills = skillList.join(', ');
@@ -252,7 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.toggle('hidden', !(matchesSearch && matchesFilter));
         });
 
-        document.querySelectorAll('.year-group').forEach(yearGroup => {
+        // Scoped to Projects: career year groups hold no project cards and must not be hidden by a search.
+        document.querySelectorAll('#projects .year-group').forEach(yearGroup => {
             const hasVisibleCard = yearGroup.querySelector('.project-card:not(.hidden)');
             yearGroup.classList.toggle('hidden', !hasVisibleCard);
         });
