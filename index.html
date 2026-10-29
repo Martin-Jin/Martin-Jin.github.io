@@ -18,7 +18,7 @@
     </div>
 
     <header>
-        <nav>
+        <nav aria-label="Main navigation">
             <a href="#home" class="nav-link">Home</a>
             <a href="#projects" class="nav-link">Projects</a>
             <a href="#careers" class="nav-link">Careers</a>
@@ -51,9 +51,9 @@
                     </div>
                     <p class="about-note">
                         <strong>About this site:</strong> a running log of engineering projects (robots, CAD, control
-                        systems and software) and of my experience in the F:SAE:47 autonomous team. Each entry records how
-                        a design became a working implementation. The site is still a work in progress, so a few older
-                        write-ups have less detail than the rest.
+                        systems and software) and my broader engineering experience. Each entry records how a design
+                        became a working implementation. The site is still a work in progress, so a few older write-ups
+                        have less detail than the rest.
                     </p>
                 </div>
             </div>
@@ -123,6 +123,32 @@
                             </div>
 
                             <div class="year-content">
+                                <div class="project-card" id="proj-cantviz-quizzes"
+                                    data-title="Can'tviz Quizzes"
+                                    data-live="https://martin-jin.github.io/practice-questions/"
+                                    data-resource="https://github.com/Martin-Jin/practice-questions"
+                                    data-resource-label="GitHub" data-image="projects/cantviz-quizzes/cover.png"
+                                    data-image-fit="contain" data-hours="5 hours"
+                                    data-what="The coding-question mode presents CodeRunner-style C++ tasks in an in-browser editor, compiles answers, runs tests, and shows output differences and statistics.|A separate library accepts worked-problem PDFs, quiz screenshots and typed or pasted questions, then supports answer checking and self-marking.|Search, saved progress, practice sessions, repeat practice for difficult questions and backup tools support both kinds of study."
+                                    data-how="Coding questions are organised into sets, while personal study materials stay in folders on the user's own computer and are never committed.|The published app compiles coding answers through Wandbox; a local server can instead use the computer's g++ compiler.|The app is built with React, Vite and Monaco Editor."
+                                    data-why="The app supports practice beyond programming quizzes by keeping personal course questions and coding exercises in one place.">
+                                    <div class="card-header">
+                                        <h3>Can'tviz Quizzes</h3>
+                                        <span class="timeline-date">October</span>
+                                    </div>
+                                    <p>One practice app for coding quizzes and personal study material, from PDFs
+                                        and screenshots to questions entered by hand.</p>
+                                    <div class="skill-pills">
+                                        <span class="pill">Programming</span>
+                                        <span class="pill">Web Dev</span>
+                                        <span class="pill">UI/UX</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <a href="https://martin-jin.github.io/practice-questions/" target="_blank"
+                                            rel="noopener" class="link-btn accent-btn">Live App</a>
+                                        <button class="read-more-btn">View Details &rarr;</button>
+                                    </div>
+                                </div>
                                 <div class="project-card" data-title="Music Player App with Cloud Sync"
                                     data-image="projects/music-player-app/cover.jpg" data-image-fit="contain"
                                     data-hours="5 hours"
@@ -444,7 +470,7 @@
             </div>
         </section>
 
-        <section id="careers" class="section">
+        <section id="careers" class="section bg-light">
             <div class="container">
                 <div class="main-timeline">
                     <h2 class="section-title reveal">Career Timeline</h2>

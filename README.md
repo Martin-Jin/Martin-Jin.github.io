@@ -25,8 +25,9 @@ cd Martin-Jin.github.io
 python -m http.server 8000   # or: npx serve
 ```
 
-Then visit `http://localhost:8000`. The page should show four sections in the header: Home, Projects,
-Careers and Links.
+Then visit `http://localhost:8000`. The header shows Home, Projects, Careers and Links. Projects
+and Careers share one content position: choosing either replaces the other, while Links stays
+after the selected content.
 
 ## How It Works
 
@@ -39,8 +40,8 @@ Three files do all the work:
   - fills the detail modal when a card's "View Details" button is clicked
   - sorts each project year by month on load, newest first
   - drives the search box and the skill filters, which match a project's title and skill pills
-  - handles the collapsible year groups and the scroll-based highlighting of the header and the
-    year links
+  - switches between the project and career views, keeps hash navigation and browser history in
+    sync, and highlights the current header and project-year links while scrolling
 - **`style.css`** – one stylesheet, organised by section (navigation, timeline, cards, modal,
   sidebar, mobile breakpoint). A small set of CSS variables at the top sets colour and sizing.
 
@@ -49,6 +50,9 @@ Media lives in one folder per project or role, so everything a card uses sits to
 - **`projects/<project-slug>/`** – the cover image, plus any PDF or video linked from that project.
 - **`careers/<role-slug>/`** – the photos, videos and video posters for one career entry.
 - **`images/`** – the profile photo.
+
+The Can'tviz screenshot is stored as `projects/cantviz-quizzes/cover.png`, with the rest of that
+project's media. Keep future media in its project or role folder.
 
 There's no framework, bundler or build output. What is in the repo is what ships.
 

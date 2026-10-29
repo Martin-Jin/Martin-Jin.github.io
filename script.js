@@ -29,62 +29,116 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 2. NAVIGATION & SMOOTH SCROLL ---
-    document.addEventListener('click', (e) => {
-        const anchor = e.target.closest('a[href^="#"]');
-        if (!anchor || anchor.classList.contains('timeline-nav-item')) return;
+    // --- 2. CONTENT NAVIGATION ---
+    const projectSection = document.getElementById('projects');
+    const careerSection = document.getElementById('careers');
+    const contentSections = [projectSection, careerSection].filter(Boolean);
+    const timelineNav = document.querySelector('.timeline-nav');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let activeContentId = '';
 
-        e.preventDefault();
+    const setActiveContent = (sectionId) => {
+        const activeSection = contentSections.find(section => section.id === sectionId);
+        if (!activeSection) return;
+
+        activeContentId = activeSection.id;
+        contentSections.forEach(section => {
+            const isActive = section === activeSection;
+            section.hidden = !isActive;
+            section.setAttribute('aria-hidden', String(!isActive));
+        });
+        if (timelineNav) timelineNav.classList.toggle('is-hidden', activeSection !== projectSection);
+    };
+
+    const initialTarget = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    const initialContent = initialTarget?.closest('#projects, #careers');
+    setActiveContent(initialContent?.id || 'projects');
+
+    const scrollToTarget = (target, behavior = reduceMotion.matches ? 'auto' : 'smooth') => {
+        const navOffset = 90;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+        window.scrollTo({ top: offsetPosition, behavior });
+    };
+
+    const navigateToCurrentHash = () => {
+        const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+        const targetContent = target?.closest('#projects, #careers');
+        const contentChanged = targetContent && targetContent.id !== activeContentId;
+        if (contentChanged) setActiveContent(targetContent.id);
+
+        requestAnimationFrame(() => {
+            if (target) scrollToTarget(target, contentChanged ? 'auto' : undefined);
+            handleScroll();
+        });
+    };
+
+    document.addEventListener('click', (event) => {
+        const anchor = event.target.closest('a[href^="#"]');
+        if (!anchor) return;
+
         const targetId = anchor.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
+        const targetElement = document.getElementById(targetId.slice(1));
+        if (!targetElement) return;
 
-        if (targetElement) {
-            const navOffset = 90;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-            history.pushState(null, null, targetId);
-        }
+        event.preventDefault();
+        const targetContent = targetElement.closest('#projects, #careers');
+        const contentChanged = targetContent && targetContent.id !== activeContentId;
+        if (targetContent) setActiveContent(targetContent.id);
+        history.pushState(null, null, targetId);
+
+        requestAnimationFrame(() => {
+            scrollToTarget(targetElement, contentChanged ? 'auto' : undefined);
+            handleScroll();
+        });
     });
 
     // --- 3. SCROLL REVEAL & NAV HIGHLIGHTING ---
     const revealElements = document.querySelectorAll('.reveal');
     const yearSections = document.querySelectorAll('.year-group');
-    const navLinks = document.querySelectorAll('.nav-link');
     const timelineItems = document.querySelectorAll('.timeline-nav-item');
-    const timelineNav = document.querySelector('.timeline-nav');
 
     const handleScroll = () => {
         let currentSection = "";
         let currentYear = "";
 
         revealElements.forEach(el => {
+            if (el.closest('section')?.hidden) return;
             if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
                 el.classList.add('active');
             }
         });
 
         document.querySelectorAll('section').forEach(s => {
+            if (s.hidden) return;
             if (window.scrollY >= s.offsetTop - 200) {
                 currentSection = s.getAttribute('id');
             }
         });
 
         yearSections.forEach(ys => {
+            if (ys.closest('section')?.hidden) return;
             const rect = ys.getBoundingClientRect();
             if (rect.top < window.innerHeight / 2 && rect.bottom > 100) {
                 currentYear = ys.getAttribute('id');
             }
         });
 
-        // The year links only cover project years, so they would mislead beside the career timeline.
-        if (timelineNav) timelineNav.classList.toggle('is-hidden', currentSection === 'careers');
-        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${currentSection}`));
+        if (timelineNav) timelineNav.classList.toggle('is-hidden', currentSection !== 'projects');
+        navLinks.forEach(link => {
+            const isCurrent = link.getAttribute('href') === `#${currentSection}`;
+            link.classList.toggle('active', isCurrent);
+            if (isCurrent) link.setAttribute('aria-current', 'page');
+            else link.removeAttribute('aria-current');
+        });
         timelineItems.forEach(item => item.classList.toggle('active', item.getAttribute('href') === `#${currentYear}`));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('popstate', navigateToCurrentHash);
     handleScroll();
+    if (initialTarget) requestAnimationFrame(() => scrollToTarget(initialTarget, 'auto'));
 
     // --- 4. MODAL LOGIC & BULLET POINTS ---
     // These are all static, single-instance elements, so look them up once rather than on every open.
