@@ -49,7 +49,7 @@ Media lives in one folder per project or role, so everything a card uses sits to
 
 - **`projects/<project-slug>/`** – the cover image, plus any PDF or video linked from that project.
 - **`careers/<role-slug>/`** – the photos, videos and video posters for one career entry.
-- **`images/`** – the profile photo.
+- **`images/`** – the profile photo and the site's SVG logo, used in the header and as its favicon.
 
 The Can'tviz screenshot is stored as `projects/cantviz-quizzes/cover.png`, with the rest of that
 project's media. Keep future media in its project or role folder.
