@@ -130,6 +130,29 @@
                             </div>
 
                             <div class="year-content">
+                                <div class="project-card" id="proj-arena-ai"
+                                    data-title="Arena AI Reinforcement Learning Fighter"
+                                    data-resource="https://github.com/Martin-Jin/arena-rl"
+                                    data-resource-label="GitHub" data-hours="20 hours"
+                                    data-what="The game is a 2D arena fighter. Each fighter has 100 health and can move left and right, jump, swing a sword and parry. A parry only protects for a short window of frames after the button is pressed, so it must be timed to an incoming swing. Pressing it repeatedly shrinks the window.|A successful parry cancels the attacker's swing and staggers the attacker (it cannot start a new attack for a short time). The parrying fighter then gets a counter attack, which deals more damage than a normal hit. A fight ends when the agent or every opponent is defeated, or when the time limit runs out. Fighters have solid bodies, so they cannot walk through each other.|The simulation runs at a fixed 60 steps per second and does not depend on rendering. The same inputs therefore always give the same fight, which makes training results reproducible.|A fighting agent is trained by reinforcement learning (learning by trial and error from a reward) to beat one to three scripted opponents in a 2D arena. The opponents include one that hunts the agent, one that parries every attack it can see, one that runs away, an idle dummy and a random fighter.|The network reads one observation vector and uses an attention block (a layer that learns which inputs to weigh most) to focus on the opponents that matter. Dead or absent opponents are masked out, so the same network handles one, two or three opponents.|PPO (proximal policy optimisation, a training method that limits how far each update can move the policy) is written from scratch in PyTorch, with GAE (generalised advantage estimation, a way of judging how much better an action was than expected).|A pygame viewer lets a person fight the trained agent, or watch it fight."
+                                    data-how="Two separate networks share no parameters. The policy network (the actor) outputs 9 logits and the value network (the critic) outputs one number, the expected return. Each has its own attention block.|Each fighter is embedded by a small network, with the opponents sharing the same weights, so what is learned about one opponent applies to all of them. Only the acting fighter asks a question (the query) of the keys and values of every fighter. The attention result is joined to the fighter's own embedding before the hidden layers, so its own state is not averaged away.|The 24 actions are split into four independent choices: move, jump, attack and parry. The log probability of an action is the sum of the four, so the output stays at 9 logits instead of 24.|A time-limit cut-off and a real defeat are treated differently. After a defeat the value is not bootstrapped (the critic's estimate of the future is not added to the return). After a time limit it is, using the final observation from before the environment reset. Without that split, the critic learns that surviving to the time limit is worth nothing.|Sixteen environments run at once, with a mix of one to three opponents. Easy opponents stay in the mix so that the agent keeps seeing wins.|Rollout actions run on a CPU copy of the network that is synchronised after every update, because the network is small and a GPU transfer for every step would be slower. The updates run on the GPU when one is available."
+                                    data-why="The project practises building the full reinforcement-learning loop by hand, so that each piece (the advantage calculation, the clipped loss and the end-of-episode handling) is understood instead of hidden inside a library.|A fixed-size input does not suit a fight whose number of opponents changes. Attention with a mask was chosen to test whether one network can handle all three cases.|The simulation is deterministic with a fixed timestep, so a training result can be reproduced and compared across changes."
+                                    data-next="Add self-play, so that the agent trains against past versions of itself instead of only scripted opponents.|Add behaviour cloning from logged human fights.|Retrain the trained agent on the attention network, because the existing checkpoint was trained on the older input layout and no longer loads.">
+                                    <div class="card-header">
+                                        <h3>Arena AI Reinforcement Learning Fighter</h3>
+                                        <span class="timeline-date">November</span>
+                                    </div>
+                                    <p>A reinforcement-learning agent with hand-written PPO and an attention network that
+                                        fights one to three opponents in a 2D arena.</p>
+                                    <div class="skill-pills">
+                                        <span class="pill">Machine Learning</span>
+                                        <span class="pill">Python</span>
+                                        <span class="pill">Programming</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="read-more-btn">View Details &rarr;</button>
+                                    </div>
+                                </div>
                                 <div class="project-card" id="proj-cantviz-quizzes"
                                     data-title="Can'tviz Quizzes"
                                     data-live="https://martin-jin.github.io/practice-questions/"
@@ -458,6 +481,7 @@
                                 <button class="filter-pill" data-filter="Programming">Programming</button>
                                 <button class="filter-pill" data-filter="Design">Design</button>
                                 <button class="filter-pill" data-filter="Web Dev">Web Dev</button>
+                                <button class="filter-pill" data-filter="Machine Learning">Machine learning</button>
                                 <button class="filter-pill" data-filter="Autonomous">Autonomous vehicles</button>
                             </div>
                         </div>
